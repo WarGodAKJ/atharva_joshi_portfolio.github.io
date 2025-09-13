@@ -3,8 +3,10 @@ const typewriterText = [
   "Hi I'm Atharva!",
   "Nice to meet you!"
 ];
+
 const typewriterEl = document.getElementById('typewriter');
 let twLine = 0, twChar = 0;
+
 function typeWriter() {
   if (!typewriterEl) return;
   let currentLine = typewriterText[twLine];
@@ -22,6 +24,7 @@ function typeWriter() {
   }
 }
 window.addEventListener('DOMContentLoaded', typeWriter);
+
 /* Project Modal Functionality */
 const projectsInfo = {
   proj1: {
@@ -60,15 +63,20 @@ const projectsInfo = {
     link: null
   }
 };
+
 const modalBg = document.getElementById('modal-bg');
 let modalEl = null;
+
 function openModal(projectKey) {
   const project = projectsInfo[projectKey];
   if (!project) return;
+
   closeModal();
   modalBg.style.display = "block";
+
   modalEl = document.createElement("div");
   modalEl.className = "project-modal";
+
   // Special case for project 5 (title + image only)
   if (projectKey === "proj5") {
     modalEl.innerHTML = `
@@ -92,11 +100,14 @@ function openModal(projectKey) {
       </div>
     `;
   }
+
   document.body.appendChild(modalEl);
   document.body.style.overflow = "hidden";
+
   modalEl.querySelector('.modal-close').onclick = closeModal;
   modalBg.onclick = closeModal;
 }
+
 function closeModal() {
   if (modalEl) {
     modalEl.remove();
@@ -105,11 +116,13 @@ function closeModal() {
   }
   modalBg.style.display = "none";
 }
+
 document.querySelectorAll('.project-card').forEach(card =>
   card.onclick = function() {
     openModal(card.getAttribute('data-project'));
   }
 );
+
 /* Collapsible Experience Cards */
 document.querySelectorAll('.exp-header').forEach(header => {
   header.onclick = function() {
