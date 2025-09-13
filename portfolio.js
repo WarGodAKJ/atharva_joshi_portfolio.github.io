@@ -54,6 +54,13 @@ const projectsInfo = {
     achievement: "Achievement: Successfully reduced mesh element count by 40% while improving simulation reliability by 30%.",
     img: "assets/research_img_1.jpeg",
     link: null
+  },
+  proj5: {
+    title: "Coming Soon!",
+    desc: "",
+    achievement: "",
+    img: "assets/project5-img.jpg",
+    link: null
   }
 };
 
@@ -69,18 +76,30 @@ function openModal(projectKey) {
 
   modalEl = document.createElement("div");
   modalEl.className = "project-modal";
-  modalEl.innerHTML = `
-    <button class="modal-close" title="Close">&times;</button>
-    <h3>${project.title}</h3>
-    <div class="modal-left">
-      <div class="modal-content">${project.desc}</div>
-      ${project.achievement ? `<div class="achievement">${project.achievement}</div>` : ""}
-      ${project.link ? `<a href="${project.link.url}" target="_blank" class="modal-link">${project.link.label}</a>` : ""}
-    </div>
-    <div class="modal-right">
-      <img src="${project.img}" alt="${project.title}">
-    </div>
-  `;
+
+  // Special case for project 5 (title + image only)
+  if (projectKey === "proj5") {
+    modalEl.innerHTML = `
+      <button class="modal-close" title="Close">&times;</button>
+      <h3>${project.title}</h3>
+      <div class="modal-right" style="grid-column: span 2; justify-content:center;">
+        <img src="${project.img}" alt="${project.title}">
+      </div>
+    `;
+  } else {
+    modalEl.innerHTML = `
+      <button class="modal-close" title="Close">&times;</button>
+      <h3>${project.title}</h3>
+      <div class="modal-left">
+        ${project.desc ? `<div class="modal-content">${project.desc}</div>` : ""}
+        ${project.achievement ? `<div class="achievement">${project.achievement}</div>` : ""}
+        ${project.link ? `<a href="${project.link.url}" target="_blank" class="modal-link">${project.link.label}</a>` : ""}
+      </div>
+      <div class="modal-right">
+        <img src="${project.img}" alt="${project.title}">
+      </div>
+    `;
+  }
 
   document.body.appendChild(modalEl);
   document.body.style.overflow = "hidden";
