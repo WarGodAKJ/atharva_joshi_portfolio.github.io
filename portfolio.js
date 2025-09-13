@@ -13,13 +13,13 @@ function typeWriter() {
   if (twChar < currentLine.length) {
     typewriterEl.innerHTML += currentLine.charAt(twChar);
     twChar++;
-    setTimeout(typeWriter, 80); // slowed down typing speed
+    setTimeout(typeWriter, 80); // slower typing
   } else {
     if (twLine < typewriterText.length - 1) {
       typewriterEl.innerHTML += "<br>";
       twLine++;
       twChar = 0;
-      setTimeout(typeWriter, 600); // longer pause before next line
+      setTimeout(typeWriter, 600); // pause before next line
     }
   }
 }
@@ -35,7 +35,7 @@ const projectsInfo = {
     link: { type: "pdf", url: "assets/project1-report.pdf", label: "View Associated Documents" }
   },
   proj2: {
-    title: "ASME - Assistive Tech",
+    title: "Multi-Sensor Haptic Headset – ASME",
     desc: "A multi-sensor vibration feedback wearable for visually impaired navigation. Features real-time proximity detection using Arduino and ultrasonic sensors.",
     achievement: "Achievement: Tactile feedback device improving user experience.",
     img: "assets/project2-img.jpg",
@@ -49,10 +49,10 @@ const projectsInfo = {
     link: { type: "pdf", url: "assets/project3-proposal.pdf", label: "View Associated Documents" }
   },
   proj4: {
-    title: "MM-LPBF AM Research",
+    title: "Additive Manufacturing Research",
     desc: "Finite element analysis and mesh convergence studies on brass-steel alloys for additive manufacturing. Improved simulation speeds, lower error, and higher reliability.",
+    achievement: "Achievement: Successfully reduced mesh element count by 40% while improving simulation reliability by 30%.",
     img: "assets/research_img_1.jpeg",
-    achievement: "",
     link: null
   }
 };
