@@ -1,26 +1,23 @@
-/* Typing animation on intro */
+/* Typing animation */
 const typewriterText = [
   "Hi I'm Atharva!",
   "Nice to meet you!"
 ];
-
 const typewriterEl = document.getElementById('typewriter');
 let twLine = 0, twChar = 0;
-
 function typeWriter() {
   if (!typewriterEl) return;
   let currentLine = typewriterText[twLine];
   if (twChar < currentLine.length) {
     typewriterEl.innerHTML += currentLine.charAt(twChar);
     twChar++;
-    setTimeout(typeWriter, 40); // typing speed
+    setTimeout(typeWriter, 40);
   } else {
-    // Move to next line if available
     if (twLine < typewriterText.length - 1) {
       typewriterEl.innerHTML += "<br>";
       twLine++;
       twChar = 0;
-      setTimeout(typeWriter, 430); // pause before next line
+      setTimeout(typeWriter, 430);
     }
   }
 }
@@ -38,7 +35,7 @@ const projectsInfo = {
     title: "ASME - Assistive Tech",
     desc: "A multi-sensor vibration feedback wearable for visually impaired navigation. Features real-time proximity detection using Arduino and ultrasonic sensors.",
     img: "assets/project2-img.jpg",
-    
+    github: "https://github.com/UnbrokenMango21/AssistiveTechHeadset"
   },
   proj3: {
     title: "Kibble Dispenser for Service Dogs",
@@ -47,10 +44,9 @@ const projectsInfo = {
     pdf: "assets/project3-proposal.pdf"
   },
   proj4: {
-    title: "MM-LPBF AM Research",
+    title: "Additive Manufacturing Research",
     desc: "Finite element analysis and mesh convergence studies on brass-steel alloys for additive manufacturing. Improved simulation speeds, lower error, and higher reliability.",
-    img: "assets/research_img_1.jpeg",
-    
+    img: "assets/research_img_1.jpg"
   }
 };
 
@@ -60,14 +56,22 @@ let modalEl = null;
 function openModal(projectKey) {
   closeModal();
   modalBg.style.display = "block";
+  const p = projectsInfo[projectKey];
+  let linksHtml = "";
+  if (p.pdf) {
+    linksHtml = `<a href="${p.pdf}" class="modal-pdf" target="_blank">View Associated Documents</a>`;
+  }
+  if (p.github) {
+    linksHtml = `<a href="${p.github}" class="modal-pdf" target="_blank">View on GitHub</a>`;
+  }
   modalEl = document.createElement("div");
   modalEl.className = "project-modal";
   modalEl.innerHTML = `
     <button class="modal-close" title="Close">&times;</button>
-    <h3>${projectsInfo[projectKey].title}</h3>
-    <div class="modal-content">${projectsInfo[projectKey].desc}</div>
-    <img src="${projectsInfo[projectKey].img}" alt="Project image" class="modal-img">
-    <a href="${projectsInfo[projectKey].pdf}" class="modal-pdf" target="_blank">View Associated Documents</a>
+    <h3>${p.title}</h3>
+    <div class="modal-content" style="text-align:left;">${p.desc}</div>
+    <img src="${p.img}" alt="Project image" class="modal-img">
+    ${linksHtml}
   `;
   document.body.appendChild(modalEl);
   document.body.style.overflow = "hidden";
