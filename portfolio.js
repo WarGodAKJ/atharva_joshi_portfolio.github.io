@@ -13,14 +13,13 @@ function typeWriter() {
   if (twChar < currentLine.length) {
     typewriterEl.innerHTML += currentLine.charAt(twChar);
     twChar++;
-    setTimeout(typeWriter, 40); // typing speed
+    setTimeout(typeWriter, 80); // slowed down typing speed
   } else {
-    // Move to next line if available
     if (twLine < typewriterText.length - 1) {
       typewriterEl.innerHTML += "<br>";
       twLine++;
       twChar = 0;
-      setTimeout(typeWriter, 430); // pause before next line
+      setTimeout(typeWriter, 600); // longer pause before next line
     }
   }
 }
@@ -31,26 +30,30 @@ const projectsInfo = {
   proj1: {
     title: "Tone Control/Karaoke Mixer Circuit",
     desc: "A five-stage audio processing system, featuring mixer/karaoke switching, tone control, and LED display. Designed and simulated using Multisim and MATLAB.",
+    achievement: "Achievement: Clear audio with effective tone control.",
     img: "assets/project1-img.jpg",
-    pdf: "assets/project1-report.pdf"
+    link: { type: "pdf", url: "assets/project1-report.pdf", label: "View Associated Documents" }
   },
   proj2: {
     title: "ASME - Assistive Tech",
     desc: "A multi-sensor vibration feedback wearable for visually impaired navigation. Features real-time proximity detection using Arduino and ultrasonic sensors.",
+    achievement: "Achievement: Tactile feedback device improving user experience.",
     img: "assets/project2-img.jpg",
-    
+    link: { type: "github", url: "https://github.com/UnbrokenMango21/AssistiveTechHeadset", label: "GitHub" }
   },
   proj3: {
     title: "Kibble Dispenser for Service Dogs",
     desc: "A wheelchair-attachable dog food dispenser delivering single kibbles, optimized for low-dexterity users. Designed in Fusion 360, prototyped via 3D printing.",
+    achievement: "Achievement: 90% success rate operated by target users.",
     img: "assets/project3-img.jpg",
-    pdf: "assets/project3-proposal.pdf"
+    link: { type: "pdf", url: "assets/project3-proposal.pdf", label: "View Associated Documents" }
   },
   proj4: {
     title: "MM-LPBF AM Research",
     desc: "Finite element analysis and mesh convergence studies on brass-steel alloys for additive manufacturing. Improved simulation speeds, lower error, and higher reliability.",
     img: "assets/research_img_1.jpeg",
-    
+    achievement: "",
+    link: null
   }
 };
 
@@ -58,19 +61,30 @@ const modalBg = document.getElementById('modal-bg');
 let modalEl = null;
 
 function openModal(projectKey) {
+  const project = projectsInfo[projectKey];
+  if (!project) return;
+
   closeModal();
   modalBg.style.display = "block";
+
   modalEl = document.createElement("div");
   modalEl.className = "project-modal";
   modalEl.innerHTML = `
     <button class="modal-close" title="Close">&times;</button>
-    <h3>${projectsInfo[projectKey].title}</h3>
-    <div class="modal-content">${projectsInfo[projectKey].desc}</div>
-    <img src="${projectsInfo[projectKey].img}" alt="Project image" class="modal-img">
-    <a href="${projectsInfo[projectKey].pdf}" class="modal-pdf" target="_blank">View Associated Documents</a>
+    <h3>${project.title}</h3>
+    <div class="modal-left">
+      <div class="modal-content">${project.desc}</div>
+      ${project.achievement ? `<div class="achievement">${project.achievement}</div>` : ""}
+      ${project.link ? `<a href="${project.link.url}" target="_blank" class="modal-link">${project.link.label}</a>` : ""}
+    </div>
+    <div class="modal-right">
+      <img src="${project.img}" alt="${project.title}">
+    </div>
   `;
+
   document.body.appendChild(modalEl);
   document.body.style.overflow = "hidden";
+
   modalEl.querySelector('.modal-close').onclick = closeModal;
   modalBg.onclick = closeModal;
 }
