@@ -34,7 +34,7 @@ const projectsInfo = {
     desc: "Finite element analysis and mesh convergence studies for brass-steel alloys in AM processes. Improved simulation speeds, lower error, higher reliability.",
     skill: "FEA (Ansys, Abaqus), Strength of Materials",
     ach: "Reduced mesh element count by 40%, enhanced simulation reliability by 30%.",
-    img1: "assets/research_img_1.jpg",
+    img1: "assets/research_img_1.jpeg",
     img2: "assets/research_img_2.jpg",
     pdf: null
   }
