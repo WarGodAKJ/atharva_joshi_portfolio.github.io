@@ -38,7 +38,7 @@ const projectsInfo = {
     title: "ASME - Assistive Tech",
     desc: "A multi-sensor vibration feedback wearable for visually impaired navigation. Features real-time proximity detection using Arduino and ultrasonic sensors.",
     img: "assets/project2-img.jpg",
-    pdf: "assets/project2-design.pdf"
+    
   },
   proj3: {
     title: "Kibble Dispenser for Service Dogs",
@@ -50,7 +50,7 @@ const projectsInfo = {
     title: "MM-LPBF AM Research",
     desc: "Finite element analysis and mesh convergence studies on brass-steel alloys for additive manufacturing. Improved simulation speeds, lower error, and higher reliability.",
     img: "assets/research_img_1.jpeg",
-    pdf: "assets/project4-report.pdf"
+    
   }
 };
 
