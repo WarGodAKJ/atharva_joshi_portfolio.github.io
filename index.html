@@ -21,6 +21,7 @@
       <div class="menu-icon">&#9776;</div>
     </div>
   </header>
+
   <main>
     <!-- Split hero with typing animation -->
     <section id="home" class="split-hero">
@@ -40,16 +41,26 @@
     <section id="about" class="section">
       <h2 class="section-title accent">About Me</h2>
       <div class="about-wrap">
+        <!-- Left side: refreshed About Me text -->
         <div>
           <p>
-            I'm a Mech.E student with a strong interest in robotics and Industry 4.0, backed by industry experience in mechanical integrity and product design. My work spans CAD modeling, FEA simulation, and prototyping for real-world applications, from vibration fixtures for PCB testing to ergonomic assistive devices. I’m drawn to the evolving challenges of miniaturization, automation, and design for manufacturability that define the future of hardware.
+            I’m an enthusiastic Mechanical Engineering student passionate about robotics, automation, and Industry 4.0.
+            My academic foundation and hands-on industry experiences have shaped me into someone who thrives on solving
+            complex challenges — from designing vibration fixtures for PCB testing to creating ergonomic assistive devices
+            that make a real impact.
+          </p>
+          <p>
+            My work is fueled by a fascination with <span class="highlight">miniaturization, automation, and
+            manufacturability</span>. I’m particularly drawn to bridging the gap between design concepts and real-world
+            applications through CAD modeling, FEA simulation, and rapid prototyping.
           </p>
           <ul class="info-list">
-            <li><b>Interests:</b> Hardware Product Design, DFAM, Human-Robot Interaction, and much more 🙂</li>
+            <li><b>Interests:</b> Hardware Product Design, DFAM, Human-Robot Interaction, and more 🙂</li>
           </ul>
         </div>
-        <div>
-          <h3 class="skills-title accent">Skills</h3>
+
+        <!-- Right side: skills, centered vertically (no title) -->
+        <div class="skills-centered">
           <ul class="skills-list">
             <li><b>CAD and Simulation:</b> SolidWorks, AutoCAD, Ansys, Abaqus, Fusion 360, NI Multisim, FEA.</li>
             <li><b>Engineering Methods:</b> DFM/DFA, prototyping, root cause analysis, GD&T (ASME Y14.5), ISO standards.</li>
@@ -68,52 +79,41 @@
         <!-- Project Card 1 -->
         <div class="project-card" data-project="proj1">
           <h3 class="accent">Tone Control/Karaoke Mixer Circuit</h3>
-          <p>
-            Five-stage audio processing, mixer/karaoke switching, tone control, volume adjustment, and LED volume display.
-            <span class="sm-label">NI Multisim, MATLAB</span>
-          </p>
+          <img src="assets/project1-img.jpg" alt="Tone Control Circuit" class="project-img">
           <div class="achievement accent">Achievement: Clear audio with effective tone control.</div>
         </div>
         <!-- Project Card 2 -->
         <div class="project-card" data-project="proj2">
           <h3 class="accent">ASME - Assistive Tech</h3>
-          <p>
-            Multi-sensor vibration feedback system for visually impaired users, Arduino, ultrasonic sensors, vibration motors for real-time obstacle detection.
-            <span class="sm-label">Arduino, C++, SolidWorks</span>
-          </p>
+          <img src="assets/project2-img.jpg" alt="Assistive Tech" class="project-img">
           <div class="achievement accent">Achievement: Tactile feedback device improving user experience.</div>
         </div>
         <!-- Project Card 3 -->
         <div class="project-card" data-project="proj3">
           <h3 class="accent">Kibble Dispenser for Service Dogs</h3>
-          <p>
-            Wheelchair-attachable dog food dispenser for low-dexterity users. Delivers one kibble at a time with minimal effort.
-            <span class="sm-label">Fusion 360, 3D Printing, Prototyping</span>
-          </p>
+          <img src="assets/project3-img.jpg" alt="Kibble Dispenser" class="project-img">
           <div class="achievement accent">Achievement: 90% success rate operated by target users.</div>
         </div>
         <!-- Project Card 4 -->
         <div class="project-card" data-project="proj4">
           <h3 class="accent">Additive Manufacturing Research</h3>
-          <p>
-            FEA on brass-steel alloy components with Ansys & Abaqus (&lt;2% error, 40% mesh count reduction). Simulation accuracy improved by 30%.
-            <span class="sm-label">FEA (Ansys, Abaqus)</span>
-          </p>
+          <img src="assets/research_img_1.jpeg" alt="AM Research" class="project-img">
         </div>
       </div>
-      <!-- Modals for each project -->
+
+      <!-- Modal background -->
       <div id="modal-bg" class="modal-bg"></div>
-      <!-- Project modals are injected here by JS -->
     </section>
 
-    <!-- Experience (Collapsible) -->
+    <!-- Experience -->
     <section id="experience" class="section">
       <h2 class="section-title accent">Experience</h2>
       <div class="exp-list">
         <!-- Amphenol -->
         <div class="exp-card">
           <div class="exp-header" data-exp="amphenol">
-            <span class="exp-title accent"><b>Mechanical Intergity Engineering Intern- Amphenol Communication Solutions</b></span>
+            <span class="exp-title accent"><b>Mechanical Integrity Engineering Intern</b></span>
+            <span class="exp-subtitle">Amphenol Communication Solutions</span>
             <span class="exp-dates">May 2025 – Aug 2025</span>
           </div>
           <div class="exp-body" id="amphenol-body">
@@ -128,7 +128,8 @@
         <!-- SHAPE Lab -->
         <div class="exp-card">
           <div class="exp-header" data-exp="shape">
-            <span class="exp-title accent"><b>Research Assistant- S.H.A.P.E. Lab and Human-Centered Robotics Lab</b></span>
+            <span class="exp-title accent"><b>Research Assistant</b></span>
+            <span class="exp-subtitle">S.H.A.P.E. Lab and Human-Centered Robotics Lab</span>
             <span class="exp-dates">Oct 2024 – Present</span>
           </div>
           <div class="exp-body" id="shape-body">
@@ -142,7 +143,8 @@
         <!-- Origin Labs -->
         <div class="exp-card">
           <div class="exp-header" data-exp="origin">
-            <span class="exp-title accent"><b>Lab Technician- OriginLabs Penn State </b></span>
+            <span class="exp-title accent"><b>Lab Technician</b></span>
+            <span class="exp-subtitle">OriginLabs Penn State</span>
             <span class="exp-dates">Oct 2024 – Present</span>
           </div>
           <div class="exp-body" id="origin-body">
@@ -156,7 +158,8 @@
         <!-- ASME -->
         <div class="exp-card">
           <div class="exp-header" data-exp="asme">
-            <span class="exp-title accent"><b>Design Team Officer/ Project Lead- ASME Penn State</b></span>
+            <span class="exp-title accent"><b>Design Team Officer / Project Lead</b></span>
+            <span class="exp-subtitle">ASME Penn State</span>
             <span class="exp-dates">Jan 2024 – Present</span>
           </div>
           <div class="exp-body" id="asme-body">
@@ -172,7 +175,7 @@
     <!-- Contact -->
     <section id="contact" class="section">
       <h2 class="section-title accent">Contact</h2>
-      <div class="contact-wrap">
+      <div class="contact-wrap centered-contact">
         <div>
           <p>
             Email: <a href="mailto:atharvajosh@gmail.com">atharvajosh@gmail.com</a><br>
