@@ -67,7 +67,7 @@ function openModal(projectKey) {
     <h3>${projectsInfo[projectKey].title}</h3>
     <div class="modal-content">${projectsInfo[projectKey].desc}</div>
     <img src="${projectsInfo[projectKey].img}" alt="Project image" class="modal-img">
-    <a href="${projectsInfo[projectKey].pdf}" class="modal-pdf" target="_blank">Download/View PDF</a>
+    <a href="${projectsInfo[projectKey].pdf}" class="modal-pdf" target="_blank">View Associated Documents</a>
   `;
   document.body.appendChild(modalEl);
   document.body.style.overflow = "hidden";
