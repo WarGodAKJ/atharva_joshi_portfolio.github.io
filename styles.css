@@ -54,20 +54,26 @@ nav a:hover { opacity: 1; }
   background: #222;
 }
 .split-right {
-  flex-direction: column; align-items: flex-start; justify-content: center;
+  flex-direction: column; align-items: center; justify-content: center;
   background: #232335; padding: 2rem 9% 2rem 4%; min-width: 320px; position: relative;
+  text-align: center;
 }
 .main-heading {
   font-size: 4.1rem; font-weight: 700; letter-spacing: 0.08em;
   line-height: 0.98;
   color: #fff;
+  text-align: center;
+  width: 100%;
 }
 .hero-desc {
   margin: 2rem 0 1.1rem 0; font-size: 1.13rem;
   max-width: 460px; color: #bfd6fd; font-weight: 400;
+  text-align: center; width: 100%;
 }
 .hero-actions {
-  display: flex; gap: 2.1rem; margin-bottom: 2rem;
+  display: flex; justify-content: center; align-items: center;
+  gap: 0; width: 100%;
+  margin-bottom: 2rem;
 }
 .button {
   background: #fff; color: #232335; font-weight: 600;
@@ -75,14 +81,10 @@ nav a:hover { opacity: 1; }
   font-size: 1rem; transition: background 0.17s, color 0.17s;
   box-shadow: 0 2px 10px rgba(80,120,180,0.04);
   border: none;
+  margin: 0 auto;
+  display: block;
 }
 .button:hover { background: #0075fa; color: #fff; }
-.button.secondary {
-  background: transparent; color: #fff; border: 2px solid #fff;
-  display: flex; align-items: center; gap: 0.6rem; padding: 0.95rem 2.5rem;
-}
-.button.secondary:hover { background: #fff; color: #232335; }
-.icon { font-size: 1.19rem; }
 .page-count {
   position: absolute; bottom: 2.3rem; right: 9%;
   color: #bfd6fd; font-size: 1.02rem; opacity: 0.73;
@@ -90,14 +92,9 @@ nav a:hover { opacity: 1; }
 }
 
 /* Content Sections */
-.section {
-  padding: 2.5rem 0;
-  background: #232335;
-}
+.section { padding: 2.5rem 0; background: #232335; }
 .section-title { color: #fff; font-size: 1.4rem; margin-bottom: 2.2rem; letter-spacing: 0.5px;}
-.split-about, .split-experience, .split-contact {
-  background: #18191e;
-}
+.split-about, .split-experience, .split-contact { background: #18191e; }
 .about-wrap, .contact-wrap {
   max-width: 1050px;
   margin: 0 auto;

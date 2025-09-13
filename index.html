@@ -6,6 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    // Smooth scroll for "See My Work"
+    document.addEventListener("DOMContentLoaded", function() {
+      var btn = document.getElementById('see-work-btn');
+      if (btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var target = document.getElementById('projects');
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
 </head>
 <body>
   <header class="navbar">
@@ -33,8 +46,7 @@
           Mechanical Engineering undergraduate, MI Engineering Intern @ Amphenol, strong in robotics, automation, and mechatronics.
         </p>
         <div class="hero-actions">
-          <a href="#projects" class="button">Explore Now</a>
-          <a href="#" class="button secondary"><span class="icon">&#9658;</span> Play Video</a>
+          <a href="#projects" id="see-work-btn" class="button">See My Work</a>
         </div>
         <div class="page-count">Page | <span>01</span></div>
       </div>
