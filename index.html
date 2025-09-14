@@ -4,26 +4,39 @@
   <meta charset="UTF-8">
   <title>Atharva Joshi Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="navbar">
+  <header class="navbar" id="main-navbar">
     <div class="nav-flex">
       <div class="logo">Atharva Joshi</div>
-      <!-- Horizontal slide-out nav anchored to the right -->
-      <nav class="ribbon-nav" aria-label="Primary navigation">
+
+      <!-- preserved but hidden (you asked headings visible only when hamburger opened) -->
+      <nav class="ribbon-nav" aria-label="Primary navigation" id="ribbon-nav" hidden>
         <a href="#home">Home</a>
         <a href="#about">About Me</a>
         <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
         <a href="#contact">Contact</a>
       </nav>
-      <!-- Hamburger icon (always visible, outside of ribbon-nav width) -->
-      <button class="menu-icon" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
-        <span class="hamburger-bars">&#9776;</span>
-        <span class="hamburger-close" style="display:none;">&times;</span>
-      </button>
+
+      <!-- Hamburger wrapper anchors dropdown so it opens with right edges aligned -->
+      <div class="hamburger-wrap">
+        <button class="menu-icon" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="hamburger-bars" aria-hidden="true">&#9776;</span>
+          <span class="hamburger-close" aria-hidden="true" style="display:none;">&times;</span>
+        </button>
+
+        <!-- Dropdown nav that appears under the hamburger, right edges aligned -->
+        <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+          <a href="#home" class="mobile-link">Home</a>
+          <a href="#about" class="mobile-link">About Me</a>
+          <a href="#projects" class="mobile-link">Projects</a>
+          <a href="#experience" class="mobile-link">Experience</a>
+          <a href="#contact" class="mobile-link">Contact</a>
+        </div>
+      </div>
     </div>
   </header>
 

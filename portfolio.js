@@ -25,6 +25,66 @@ function typeWriter() {
 }
 window.addEventListener('DOMContentLoaded', typeWriter);
 
+/* --- Hamburger nav functionality --- */
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobile-nav');
+
+function openMobileNav() {
+  hamburger.classList.add('open');
+  hamburger.setAttribute('aria-expanded', 'true');
+  mobileNav.classList.add('open');
+  mobileNav.setAttribute('aria-hidden', 'false');
+  // swap icons handled by CSS via .open
+}
+
+function closeMobileNav() {
+  hamburger.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  mobileNav.classList.remove('open');
+  mobileNav.setAttribute('aria-hidden', 'true');
+}
+
+if (hamburger) {
+  hamburger.addEventListener('click', (e) => {
+    const isOpen = hamburger.classList.contains('open');
+    if (isOpen) closeMobileNav();
+    else openMobileNav();
+  });
+}
+
+// Close when clicking outside
+document.addEventListener('click', (e) => {
+  const target = e.target;
+  const wrap = document.querySelector('.hamburger-wrap');
+  if (!wrap) return;
+  if (!wrap.contains(target)) {
+    // clicked outside
+    closeMobileNav();
+  }
+});
+
+// Close on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeMobileNav();
+});
+
+// Smooth scrolling for nav links (optional small enhancement)
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+    closeMobileNav();
+    // default anchor behavior will navigate; ensure smooth scrolling:
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      const el = document.querySelector(href);
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 72; // account for navbar height
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
+  });
+});
+
 /* Project Modal Functionality */
 const projectsInfo = {
   proj1: {

@@ -3,8 +3,10 @@
   --dark-bg: #232335;
   --deep-bg: #18191e;
   --heading-font: 'Inter', Arial, sans-serif;
+  --outline-dark: #1a1b26; /* unified outline color used on cards + navbar shadow */
 }
 
+/* Reset + basics */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: 'Inter', Arial, sans-serif;
@@ -12,17 +14,14 @@ body {
   color: #f5f6fa;
   line-height: 1.5;
 }
-
-a {
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 500;
-}
+a { color: var(--accent); text-decoration: none; font-weight: 500; }
 a:hover { text-decoration: underline; }
 
+/* Navbar */
 .navbar {
   background: var(--dark-bg);
-  box-shadow: 0 2px 8px rgba(20,22,34,0.09);
+  /* darker, noticeable shadow using the same outline color */
+  box-shadow: 0 10px 30px rgba(26,27,38,0.85);
   position: sticky;
   top: 0; z-index: 99;
 }
@@ -30,17 +29,90 @@ a:hover { text-decoration: underline; }
   max-width: 1200px; margin: 0 auto;
   display: flex; justify-content: space-between; align-items: center;
   padding: 0.9rem 2.2rem;
+  position: relative;
 }
 .logo {
   font-weight: 700; font-size: 1.25rem; letter-spacing: 0.6px;
   color: #fff;
 }
-nav a {
-  margin-left: 2rem; font-size: 1rem; opacity: 0.86;
-  transition: opacity 0.2s;
+
+/* Ribbon-nav preserved but hidden (we use mobile dropdown) */
+.ribbon-nav { display: none; }
+
+/* Hamburger wrap anchors dropdown so right edges align */
+.hamburger-wrap {
+  position: relative; /* anchor for dropdown */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
-nav a:hover { opacity: 1; }
-.menu-icon { display: none; font-size: 2rem; color: #fff; cursor: pointer; }
+
+/* Hamburger button styling */
+.menu-icon {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s, transform 0.18s;
+}
+.menu-icon:focus { outline: 2px solid rgba(189,214,253,0.18); outline-offset: 2px; }
+.menu-icon:hover { background: rgba(255,255,255,0.03); transform: translateY(-1px); }
+
+/* The dropdown mobile nav that animates open/close */
+.mobile-nav {
+  position: absolute;
+  right: 0;        /* right edge aligned to hamburger right edge */
+  top: calc(100% + 10px); /* open below the button with slight gap */
+  width: 220px;    /* fixed width for consistent design */
+  background: linear-gradient(180deg, rgba(24,25,30,0.98), var(--dark-bg));
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 10px 40px rgba(12,14,20,0.55);
+  padding: 0.6rem 0.45rem;
+  transform-origin: top right;
+  transform: scaleY(0);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 260ms cubic-bezier(.2,.9,.26,1), opacity 200ms ease, visibility 1ms linear 260ms;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  z-index: 1000;
+}
+
+/* open state */
+.mobile-nav.open {
+  transform: scaleY(1);
+  opacity: 1;
+  visibility: visible;
+  transition: transform 300ms cubic-bezier(.2,.9,.26,1), opacity 220ms ease;
+}
+
+/* Links inside dropdown */
+.mobile-link {
+  display: block;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.98rem;
+  color: #e9eefb;
+  text-align: left;
+  border-radius: 8px;
+  margin: 0 0.25rem;
+  transition: background 160ms, color 120ms;
+}
+.mobile-link:hover {
+  background: rgba(95,150,255,0.08);
+  color: var(--accent);
+}
+
+/* Show X icon when opened */
+.menu-icon.open .hamburger-bars { display: none; }
+.menu-icon.open .hamburger-close { display: inline; }
 
 /* Hero */
 .split-hero {
@@ -66,7 +138,7 @@ nav a:hover { opacity: 1; }
 }
 #typewriter {
   font-family: var(--heading-font);
-  font-size: 3.75rem;   /* 1.5x larger */
+  font-size: 3.75rem;
   font-weight: 800;
   color: var(--accent);
   letter-spacing: 1px;
@@ -86,11 +158,11 @@ nav a:hover { opacity: 1; }
 .section {
   padding: 2.5rem 0;
   background: var(--dark-bg);
-  scroll-margin-top: 80px; /* fixes navbar cutoff */
+  scroll-margin-top: 80px;
 }
 .section-title {
   text-align: center;
-  font-size: 3rem;   /* larger headings */
+  font-size: 3rem;
   font-weight: 900;
   color: var(--accent);
   letter-spacing: 1.1px;
@@ -127,14 +199,14 @@ nav a:hover { opacity: 1; }
   align-items: center;
 }
 
-/* >>> NEW: Boxed About Me text (left side only) <<< */
+/* Boxed About Me text (left side only) */
 .about-card {
   flex: 1 1 300px;
-  max-width: 600px; /* slightly narrower */
+  max-width: 600px;
   padding: 1.2rem 1.5rem;
   border-radius: 13px;
-  outline: 2px solid #1a1b26; /* clean outline */
-  box-shadow: 0 2px 12px rgba(30,44,88,0.12); /* subtle shadow */
+  outline: 2px solid var(--outline-dark);
+  box-shadow: 0 2px 12px rgba(30,44,88,0.12);
   text-align: left;
 }
 .no-bullets {
@@ -227,7 +299,7 @@ nav a:hover { opacity: 1; }
   grid-column: span 2;
   color: var(--accent);
   text-align: center;
-  font-size: 2.3rem;  /* larger title */
+  font-size: 2.3rem;
   font-weight: 800;
   margin-bottom: 1rem;
 }
@@ -236,7 +308,7 @@ nav a:hover { opacity: 1; }
   flex-direction: column;
   gap: 1rem;
   text-align: left;
-  font-size: 1.15rem; /* larger body */
+  font-size: 1.15rem;
 }
 .modal-right {
   display: flex;
@@ -265,7 +337,7 @@ nav a:hover { opacity: 1; }
   background: var(--deep-bg);
   border-radius: 13px;
   box-shadow: 0 2px 16px rgba(30,44,88,0.12);
-  outline: 2px solid #1a1b26; /* darker outline */
+  outline: 2px solid var(--outline-dark);
   color: #fff;
   margin-bottom: 1.5rem;
   max-width: 650px;
@@ -332,7 +404,7 @@ nav a:hover { opacity: 1; }
   margin-top: 2.2rem;
 }
 
-/* Responsive */
+/* Responsive tweaks */
 @media (max-width: 1050px) {
   .about-wrap { gap: 1.1rem; }
   .project-modal { grid-template-columns: 1fr; width: 94%; padding: 1.1rem; }
@@ -349,4 +421,6 @@ nav a:hover { opacity: 1; }
   .logo { font-size: 1rem; }
   nav a { margin-left: 0.78rem; font-size: 0.95rem; }
 }
+
+/* small utility */
 .accent { color: var(--accent); }
