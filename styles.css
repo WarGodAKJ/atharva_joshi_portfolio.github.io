@@ -3,6 +3,8 @@
   --dark-bg: #232335;
   --deep-bg: #18191e;
   --heading-font: 'Inter', Arial, sans-serif;
+  --ribbon-outline: #1a1b26;
+  --ribbon-outline-rgb: 26,27,38;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,27 +24,114 @@ a:hover { text-decoration: underline; }
 
 .navbar {
   background: var(--dark-bg);
-  box-shadow: 0 2px 8px rgba(20,22,34,0.09);
   position: sticky;
-  top: 0; z-index: 99;
+  top: 0;
+  z-index: 99;
+  box-shadow: 0 6px 20px rgba(var(--ribbon-outline-rgb), 0.86);
 }
+
 .nav-flex {
-  max-width: 1200px; margin: 0 auto;
-  display: flex; justify-content: space-between; align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 0.9rem 2.2rem;
+  position: relative;
 }
+
 .logo {
-  font-weight: 700; font-size: 1.25rem; letter-spacing: 0.6px;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.6px;
   color: #fff;
 }
-nav a {
-  margin-left: 2rem; font-size: 1rem; opacity: 0.86;
-  transition: opacity 0.2s;
-}
-nav a:hover { opacity: 1; }
-.menu-icon { display: none; font-size: 2rem; color: #fff; cursor: pointer; }
 
-/* Hero */
+/* Ensure hamburger icon stays outside ribbon-nav width */
+.menu-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.4rem;
+  border-radius: 10px;
+  transition: background 180ms ease, transform 120ms ease;
+  position: relative;
+  z-index: 1000;
+}
+.menu-icon:focus { outline: 2px solid rgba(189,214,253,0.25); }
+.menu-icon:hover { background: rgba(255,255,255,0.02); transform: translateY(-1px); }
+.hamburger-close {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+/* Ribbon nav styling and ensure width fits visible links */
+.ribbon-nav {
+  position: absolute;
+  right: 56px; /* places to immediate left of hamburger */
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+  height: 46px;
+  padding: 0.2rem 0.8rem;
+  background: rgba(20,22,34,0.95);
+  border-radius: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  opacity: 0;
+  transition: width 320ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease, padding 220ms ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.02);
+}
+.nav-flex.nav-open .ribbon-nav {
+  width: 580px; /* expanded, wide enough for all links and hamburger icon to show beside it */
+  padding: 0.2rem 1rem;
+  opacity: 1;
+}
+
+/* nav links style */
+.ribbon-nav a {
+  display: inline-block;
+  padding: 0.5rem 0.6rem;
+  font-size: 0.98rem;
+  color: #eaf0ff;
+  border-radius: 8px;
+  transition: background 180ms, color 160ms;
+}
+.ribbon-nav a:hover {
+  background: rgba(255,255,255,0.03);
+  color: var(--accent);
+}
+
+.nav-flex.nav-open .hamburger-bars { display: none; }
+.nav-flex.nav-open .hamburger-close { display: inline; }
+.hamburger-close { display:none; }
+
+.nav-flex.nav-open .menu-icon .hamburger-close { display: inline; }
+.nav-flex.nav-open .menu-icon .hamburger-bars { display: none; }
+
+/* Decorative line between logo and menu */
+.nav-flex::after {
+  content: "";
+  position: absolute;
+  left: calc(100% - 360px);
+  top: 12%;
+  bottom: 12%;
+  width: 1px;
+  background: rgba(255,255,255,0.02);
+  pointer-events: none;
+}
+
+/* HERO */
 .split-hero {
   display: flex; min-height: 80vh; width: 100%;
   background: var(--dark-bg);
@@ -66,7 +155,7 @@ nav a:hover { opacity: 1; }
 }
 #typewriter {
   font-family: var(--heading-font);
-  font-size: 3.75rem;   /* 1.5x larger */
+  font-size: 3.75rem;
   font-weight: 800;
   color: var(--accent);
   letter-spacing: 1px;
@@ -86,11 +175,11 @@ nav a:hover { opacity: 1; }
 .section {
   padding: 2.5rem 0;
   background: var(--dark-bg);
-  scroll-margin-top: 80px; /* fixes navbar cutoff */
+  scroll-margin-top: 80px;
 }
 .section-title {
   text-align: center;
-  font-size: 3rem;   /* larger headings */
+  font-size: 3rem;
   font-weight: 900;
   color: var(--accent);
   letter-spacing: 1.1px;
@@ -127,14 +216,14 @@ nav a:hover { opacity: 1; }
   align-items: center;
 }
 
-/* >>> NEW: Boxed About Me text (left side only) <<< */
+/* Boxed About Me text */
 .about-card {
   flex: 1 1 300px;
-  max-width: 600px; /* slightly narrower */
+  max-width: 600px;
   padding: 1.2rem 1.5rem;
   border-radius: 13px;
-  outline: 2px solid #1a1b26; /* clean outline */
-  box-shadow: 0 2px 12px rgba(30,44,88,0.12); /* subtle shadow */
+  outline: 2px solid var(--ribbon-outline);
+  box-shadow: 0 2px 12px rgba(30,44,88,0.12);
   text-align: left;
 }
 .no-bullets {
@@ -227,7 +316,7 @@ nav a:hover { opacity: 1; }
   grid-column: span 2;
   color: var(--accent);
   text-align: center;
-  font-size: 2.3rem;  /* larger title */
+  font-size: 2.3rem;
   font-weight: 800;
   margin-bottom: 1rem;
 }
@@ -236,7 +325,7 @@ nav a:hover { opacity: 1; }
   flex-direction: column;
   gap: 1rem;
   text-align: left;
-  font-size: 1.15rem; /* larger body */
+  font-size: 1.15rem;
 }
 .modal-right {
   display: flex;
@@ -265,7 +354,7 @@ nav a:hover { opacity: 1; }
   background: var(--deep-bg);
   border-radius: 13px;
   box-shadow: 0 2px 16px rgba(30,44,88,0.12);
-  outline: 2px solid #1a1b26; /* darker outline */
+  outline: 2px solid var(--ribbon-outline);
   color: #fff;
   margin-bottom: 1.5rem;
   max-width: 650px;
@@ -332,10 +421,11 @@ nav a:hover { opacity: 1; }
   margin-top: 2.2rem;
 }
 
-/* Responsive */
+/* Responsive adjustments */
 @media (max-width: 1050px) {
   .about-wrap { gap: 1.1rem; }
   .project-modal { grid-template-columns: 1fr; width: 94%; padding: 1.1rem; }
+  .nav-flex.nav-open .ribbon-nav { width: 97vw; right: 56px; }
 }
 @media (max-width: 750px) {
   .split-hero { flex-direction: column; min-height: 55vh; }
@@ -343,10 +433,14 @@ nav a:hover { opacity: 1; }
   #typewriter { font-size: 2.25rem; }
   .section-title { font-size: 2.2rem; }
   .exp-card { margin-left: 0; margin-right: 0; max-width: 98vw;}
+  .menu-icon { width: 44px; height: 44px; }
+  .nav-flex.nav-open .ribbon-nav { width: 97vw; right: 56px; }
 }
 @media (max-width: 480px) {
   .nav-flex { padding: 0.6rem 0.3rem; }
   .logo { font-size: 1rem; }
   nav a { margin-left: 0.78rem; font-size: 0.95rem; }
+  .nav-flex.nav-open .ribbon-nav { width: 97vw; right: 56px; }
 }
+
 .accent { color: var(--accent); }

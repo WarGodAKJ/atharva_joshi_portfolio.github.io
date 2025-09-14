@@ -3,7 +3,6 @@ const typewriterText = [
   "Hi I'm Atharva!",
   "Nice to meet you!"
 ];
-
 const typewriterEl = document.getElementById('typewriter');
 let twLine = 0, twChar = 0;
 
@@ -13,17 +12,65 @@ function typeWriter() {
   if (twChar < currentLine.length) {
     typewriterEl.innerHTML += currentLine.charAt(twChar);
     twChar++;
-    setTimeout(typeWriter, 80); // slower typing
+    setTimeout(typeWriter, 80);
   } else {
     if (twLine < typewriterText.length - 1) {
       typewriterEl.innerHTML += "<br>";
       twLine++;
       twChar = 0;
-      setTimeout(typeWriter, 600); // pause before next line
+      setTimeout(typeWriter, 600);
     }
   }
 }
 window.addEventListener('DOMContentLoaded', typeWriter);
+
+/* Hamburger / Horizontal Nav logic */
+const navFlex = document.querySelector('.nav-flex');
+const hamburgerBtn = document.getElementById('hamburger');
+const ribbonNav = document.querySelector('.ribbon-nav');
+
+function openNav() {
+  navFlex.classList.add('nav-open');
+  hamburgerBtn.setAttribute('aria-expanded', 'true');
+  // Force hamburger to stay visible as close button and swap bars/close icon
+  hamburgerBtn.querySelector('.hamburger-bars').style.display = 'none';
+  hamburgerBtn.querySelector('.hamburger-close').style.display = 'inline';
+}
+function closeNav() {
+  navFlex.classList.remove('nav-open');
+  hamburgerBtn.setAttribute('aria-expanded', 'false');
+  // Restore hamburger icon to initial state (bars visible, X hidden)
+  hamburgerBtn.querySelector('.hamburger-bars').style.display = 'inline';
+  hamburgerBtn.querySelector('.hamburger-close').style.display = 'none';
+}
+
+hamburgerBtn.addEventListener('click', (e) => {
+  // Make hamburger always clickable
+  e.stopPropagation();
+  if (navFlex.classList.contains('nav-open')) {
+    closeNav();
+  } else {
+    openNav();
+  }
+});
+document.querySelectorAll('.ribbon-nav a').forEach(a => {
+  a.addEventListener('click', () => {
+    closeNav();
+  });
+});
+document.addEventListener('click', (e) => {
+  // Make hamburger always clickable and not close when clicking inside hamburger
+  if (!navFlex.classList.contains('nav-open')) return;
+  if (hamburgerBtn.contains(e.target)) return;
+  if (!navFlex.contains(e.target)) {
+    closeNav();
+  }
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeNav();
+  }
+});
 
 /* Project Modal Functionality */
 const projectsInfo = {
@@ -77,7 +124,6 @@ function openModal(projectKey) {
   modalEl = document.createElement("div");
   modalEl.className = "project-modal";
 
-  // Special case for project 5 (title + image only)
   if (projectKey === "proj5") {
     modalEl.innerHTML = `
       <button class="modal-close" title="Close">&times;</button>
@@ -103,11 +149,9 @@ function openModal(projectKey) {
 
   document.body.appendChild(modalEl);
   document.body.style.overflow = "hidden";
-
   modalEl.querySelector('.modal-close').onclick = closeModal;
   modalBg.onclick = closeModal;
 }
-
 function closeModal() {
   if (modalEl) {
     modalEl.remove();
@@ -116,7 +160,6 @@ function closeModal() {
   }
   modalBg.style.display = "none";
 }
-
 document.querySelectorAll('.project-card').forEach(card =>
   card.onclick = function() {
     openModal(card.getAttribute('data-project'));

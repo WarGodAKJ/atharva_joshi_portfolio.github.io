@@ -11,14 +11,19 @@
   <header class="navbar">
     <div class="nav-flex">
       <div class="logo">Atharva Joshi</div>
-      <nav>
+      <!-- Horizontal slide-out nav anchored to the right -->
+      <nav class="ribbon-nav" aria-label="Primary navigation">
         <a href="#home">Home</a>
         <a href="#about">About Me</a>
         <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
         <a href="#contact">Contact</a>
       </nav>
-      <div class="menu-icon">&#9776;</div>
+      <!-- Hamburger icon (always visible, outside of ribbon-nav width) -->
+      <button class="menu-icon" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="hamburger-bars">&#9776;</span>
+        <span class="hamburger-close" style="display:none;">&times;</span>
+      </button>
     </div>
   </header>
 
@@ -31,7 +36,7 @@
       <div class="split-right">
         <h1><span id="typewriter"></span></h1>
         <div class="about-header-lines">
-          <div class="about-header-main">Undergraduate Student | B.S. Mechanical Engineering | Minor: Mechatronics</div>
+          <div class="about-header-main">Undergrad Student | B.S. Mechanical Engineering | Minor: Mechatronics</div>
           <div class="about-header-tagline">Empowering the Future through Intelligent Engineering</div>
         </div>
       </div>
@@ -41,7 +46,6 @@
     <section id="about" class="section">
       <h2 class="section-title accent">About Me</h2>
       <div class="about-wrap">
-        <!-- Wrapped text + interests inside outlined card -->
         <div class="about-card">
           <p>
             I’m an enthusiastic Mechanical Engineering student passionate about robotics, automation, and Industry 4.0.
@@ -58,14 +62,12 @@
             <li><b>Interests:</b> Hardware Product Design, DFAM, Human-Robot Interaction, and more 🙂</li>
           </ul>
         </div>
-
-        <!-- Skills remain separate -->
         <div class="skills-centered">
           <ul class="skills-list">
-            <li><b>CAD and Simulation:</b> SolidWorks, AutoCAD, Ansys, Abaqus, Fusion 360, NI Multisim.</li>
-            <li><b>Engineering Methods:</b> DFM/DFA, prototyping, root cause analysis, GD&T (ASME Y14.5), ISO standards.</li>
-            <li><b>Programming:</b> C++, MATLAB, Visual Basic, Arduino IDE.</li>
-            <li><b>Tools:</b> Microsoft Office, Minitab, PowerApps, First Aid/CPR/AED.</li>
+            <li><b>CAD and Simulation:</b> SolidWorks, AutoCAD, Ansys, Abaqus, Fusion 360, NI Multisim, Simulink</li>
+            <li><b>Engineering Methods:</b> DFM/DFA, prototyping, root cause analysis, GD&T (ASME Y14.5), ISO standards</li>
+            <li><b>Programming:</b> C++, MATLAB, Visual Basic, Arduino IDE</li>
+            <li><b>Tools:</b> Microsoft Office, Minitab, PowerApps, First Aid/CPR/AED</li>
           </ul>
         </div>
       </div>
@@ -96,7 +98,6 @@
           <img src="assets/research_img_1.jpeg" alt="AM Research" class="project-img">
           <div class="achievement accent">Achievement: Successfully reduced mesh element count by 40% while improving simulation reliability by 30%.</div>
         </div>
-        <!-- Project 5 -->
         <div class="project-card" data-project="proj5">
           <h3 class="accent">Coming Soon!</h3>
           <img src="assets/project5-img.jpg" alt="Coming Soon" class="project-img">
@@ -125,7 +126,6 @@
             </ul>
           </div>
         </div>
-
         <div class="exp-card">
           <div class="exp-header" data-exp="shape">
             <span class="exp-title accent"><b>Research Assistant</b></span>
@@ -140,7 +140,6 @@
             </ul>
           </div>
         </div>
-
         <div class="exp-card">
           <div class="exp-header" data-exp="origin">
             <span class="exp-title accent"><b>Lab Technician</b></span>
@@ -155,7 +154,6 @@
             </ul>
           </div>
         </div>
-
         <div class="exp-card">
           <div class="exp-header" data-exp="asme">
             <span class="exp-title accent"><b>Design Team Officer / Project Lead</b></span>
@@ -198,4 +196,3 @@
   <script src="portfolio.js"></script>
 </body>
 </html>
-    
