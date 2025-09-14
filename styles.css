@@ -33,9 +33,13 @@ a:hover { text-decoration: underline; }
   position: relative;
 }
 .logo {
-  font-weight: 700; font-size: 1.25rem; letter-spacing: 0.6px;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.6px;
   color: #fff;
+  padding-left: 36px; /* ✅ shifts only the text */
 }
+
 
 /* Ribbon-nav preserved but hidden (we use mobile dropdown) */
 .ribbon-nav { display: none; }
