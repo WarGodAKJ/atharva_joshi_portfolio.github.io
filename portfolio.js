@@ -34,7 +34,6 @@ function openMobileNav() {
   hamburger.setAttribute('aria-expanded', 'true');
   mobileNav.classList.add('open');
   mobileNav.setAttribute('aria-hidden', 'false');
-  // swap icons handled by CSS via .open
 }
 
 function closeMobileNav() {
@@ -58,7 +57,6 @@ document.addEventListener('click', (e) => {
   const wrap = document.querySelector('.hamburger-wrap');
   if (!wrap) return;
   if (!wrap.contains(target)) {
-    // clicked outside
     closeMobileNav();
   }
 });
@@ -68,11 +66,10 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeMobileNav();
 });
 
-// Smooth scrolling for nav links (optional small enhancement)
+// Smooth scrolling for nav links
 document.querySelectorAll('.mobile-link').forEach(link => {
   link.addEventListener('click', (e) => {
     closeMobileNav();
-    // default anchor behavior will navigate; ensure smooth scrolling:
     const href = link.getAttribute('href');
     if (href && href.startsWith('#')) {
       e.preventDefault();
