@@ -446,7 +446,11 @@ a:hover { text-decoration: underline; }
   .section-title { font-size: 2.2rem; }
   .exp-card { margin-left: 0; margin-right: 0; max-width: 98vw; }
 
-  /* --- MODIFIED MODAL STYLES FOR MOBILE --- */
+  /* --- MODIFIED MOBILE STYLES --- */
+  .project-subheading {
+    font-size: 1.8rem; /* Smaller font for subheadings on mobile */
+  }
+
   .project-modal {
     display: flex;
     flex-direction: column;
@@ -457,7 +461,7 @@ a:hover { text-decoration: underline; }
   .modal-right {
     margin-top: 1.5rem; /* Add space between text and image */
   }
-  /* --- END MODIFIED MODAL STYLES --- */
+  /* --- END MODIFIED MOBILE STYLES --- */
 }
 @media (max-width: 480px) {
   .nav-flex { padding: 0.6rem 0.3rem; }
