@@ -445,6 +445,19 @@ a:hover { text-decoration: underline; }
   #typewriter { font-size: 2.25rem; }
   .section-title { font-size: 2.2rem; }
   .exp-card { margin-left: 0; margin-right: 0; max-width: 98vw; }
+
+  /* --- MODIFIED MODAL STYLES FOR MOBILE --- */
+  .project-modal {
+    display: flex;
+    flex-direction: column;
+  }
+  .project-modal h3 {
+    grid-column: auto; /* Reset grid-specific property */
+  }
+  .modal-right {
+    margin-top: 1.5rem; /* Add space between text and image */
+  }
+  /* --- END MODIFIED MODAL STYLES --- */
 }
 @media (max-width: 480px) {
   .nav-flex { padding: 0.6rem 0.3rem; }
