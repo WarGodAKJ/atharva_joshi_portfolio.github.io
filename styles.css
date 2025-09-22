@@ -231,15 +231,30 @@ a:hover { text-decoration: underline; }
 .no-bullets li { margin-left: 0; }
 
 /* Projects */
+.project-subsection {
+  max-width: 1060px;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
+}
+.project-subheading {
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
 .projects-instructions {
   text-align: center;
   font-size: 1.02rem;
   font-weight: 500;
   margin-bottom: 1.5rem;
 }
+
+.projects-instructions.left-aligned {
+  text-align: left;
+}
+
 .project-grid {
-  max-width: 1060px;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
@@ -263,10 +278,11 @@ a:hover { text-decoration: underline; }
 }
 .project-img {
   width: 100%;
-  max-height: 180px;
+  height: 180px; /* Fixed height for consistency */
   object-fit: cover;
   border-radius: 8px;
   margin-top: 0.8rem;
+  background-color: #333; /* Placeholder background */
 }
 .achievement {
   font-size: 0.97rem; color: #5da2fa; font-weight: 500; margin-top: 0.5rem;
@@ -324,8 +340,10 @@ a:hover { text-decoration: underline; }
 }
 .modal-right {
   display: flex;
+  flex-direction: column; /* Changed to column for multiple images */
   align-items: center;
   justify-content: center;
+  gap: 1rem; /* Gap between images */
 }
 .modal-right img {
   width: 100%;

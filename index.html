@@ -12,7 +12,6 @@
     <div class="nav-flex">
       <div class="logo">Atharva Joshi</div>
 
-      <!-- preserved but hidden (you asked headings visible only when hamburger opened) -->
       <nav class="ribbon-nav" aria-label="Primary navigation" id="ribbon-nav" hidden>
         <a href="#home">Home</a>
         <a href="#about">About Me</a>
@@ -21,15 +20,12 @@
         <a href="#contact">Contact</a>
       </nav>
 
-      <!-- Hamburger wrapper anchors dropdown so it opens with right edges aligned -->
       <div class="hamburger-wrap">
         <button class="menu-icon" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
           <span class="hamburger-bars" aria-hidden="true">&#9776;</span>
-          <!-- ✅ removed inline display:none, CSS handles visibility -->
           <span class="hamburger-close" aria-hidden="true">&times;</span>
         </button>
 
-        <!-- Dropdown nav that appears under the hamburger, right edges aligned -->
         <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
           <a href="#home" class="mobile-link">Home</a>
           <a href="#about" class="mobile-link">About Me</a>
@@ -42,7 +38,6 @@
   </header>
 
   <main>
-    <!-- Hero -->
     <section id="home" class="split-hero">
       <div class="split-left">
         <img src="assets/bklreturns.jpg" alt="Profile Photo" class="hero-img">
@@ -56,7 +51,6 @@
       </div>
     </section>
 
-    <!-- About Me -->
     <section id="about" class="section">
       <h2 class="section-title accent">About Me</h2>
       <div class="about-wrap">
@@ -87,40 +81,70 @@
       </div>
     </section>
 
-    <!-- Projects -->
     <section id="projects" class="section">
       <h2 class="section-title accent">Projects</h2>
-      <div class="projects-instructions accent">Click a project to learn more</div>
-      <div class="project-grid">
-        <div class="project-card" data-project="proj1">
-          <h3 class="accent">Tone Control/Karaoke Mixer Circuit</h3>
-          <img src="assets/project1-img.jpg" alt="Tone Control Circuit" class="project-img">
-          <div class="achievement accent">Achievement: Clear audio with effective tone control.</div>
-        </div>
-        <div class="project-card" data-project="proj2">
-          <h3 class="accent">Multi-Sensor Haptic Headset – ASME</h3>
-          <img src="assets/project2-img.jpg" alt="Assistive Tech" class="project-img">
-          <div class="achievement accent">Achievement: Tactile feedback device improving user experience.</div>
-        </div>
-        <div class="project-card" data-project="proj3">
-          <h3 class="accent">Kibble Dispenser for Service Dogs</h3>
-          <img src="assets/project3-img.jpg" alt="Kibble Dispenser" class="project-img">
-          <div class="achievement accent">Achievement: 90% success rate operated by target users.</div>
-        </div>
-        <div class="project-card" data-project="proj4">
-          <h3 class="accent">Additive Manufacturing Research</h3>
-          <img src="assets/research_img_1.jpeg" alt="AM Research" class="project-img">
-          <div class="achievement accent">Achievement: Successfully reduced mesh element count by 40% while improving simulation reliability by 30%.</div>
-        </div>
-        <div class="project-card" data-project="proj5">
-          <h3 class="accent">Coming Soon!</h3>
-          <img src="assets/project5-img.jpg" alt="Coming Soon" class="project-img">
+
+      <div class="project-subsection">
+        <h3 class="project-subheading accent">Personal Projects</h3>
+        <div class="projects-instructions accent left-aligned">Click a project to learn more</div>
+        <div class="project-grid">
+          <div class="project-card" data-project="proj1">
+            <h3 class="accent">Tone Control/Karaoke Mixer Circuit</h3>
+            <img src="assets/project1-img.jpg" alt="Tone Control Circuit" class="project-img">
+            <div class="achievement accent">Achievement: Clear audio with effective tone control.</div>
+          </div>
+          <div class="project-card" data-project="proj2">
+            <h3 class="accent">Multi-Sensor Haptic Headset – ASME</h3>
+            <img src="assets/project2-img.jpg" alt="Assistive Tech" class="project-img">
+            <div class="achievement accent">Achievement: Tactile feedback device improving user experience.</div>
+          </div>
+          <div class="project-card" data-project="proj3">
+            <h3 class="accent">Kibble Dispenser for Service Dogs</h3>
+            <img src="assets/project3-img.jpg" alt="Kibble Dispenser" class="project-img">
+            <div class="achievement accent">Achievement: 90% success rate operated by target users.</div>
+          </div>
+          <div class="project-card" data-project="proj4">
+            <h3 class="accent">Additive Manufacturing Research</h3>
+            <img src="assets/research_img_1.jpeg" alt="AM Research" class="project-img">
+            <div class="achievement accent">Achievement: Successfully reduced mesh element count by 40% while improving simulation reliability by 30%.</div>
+          </div>
+          <div class="project-card" data-project="proj5">
+            <h3 class="accent">Coming Soon!</h3>
+            <img src="assets/project5-img.jpg" alt="Coming Soon" class="project-img">
+          </div>
         </div>
       </div>
+
+      <div class="project-subsection">
+        <h3 class="project-subheading accent">Internship Projects</h3>
+        <div class="projects-instructions accent left-aligned">Click a project to learn more</div>
+        <div class="project-grid">
+          <div class="project-card" data-project="intern1">
+            <h3 class="accent">Screw Torque Testing</h3>
+            <img src="assets/Screw PIC 1.png" alt="Screw Torque Testing" class="project-img">
+            <div class="achievement accent">Key Takeaway: Hands-on experience with failure testing and data interpretation.</div>
+          </div>
+          <div class="project-card" data-project="intern2">
+            <h3 class="accent">PowerApp Interface</h3>
+            <img src="assets/Power PIC 1.png" alt="PowerApp Interface" class="project-img">
+            <div class="achievement accent">Key Takeaway: Improved understanding of customer-facing tools in engineering.</div>
+          </div>
+          <div class="project-card" data-project="intern3">
+            <h3 class="accent">Qualification Reports & LLCR Data Processing</h3>
+            <img src="assets/Qualification PIC 1.png" alt="Qualification Reports" class="project-img">
+            <div class="achievement accent">Key Takeaway: Proficiency in Minitab and Overleaf.</div>
+          </div>
+          <div class="project-card" data-project="intern4">
+            <h3 class="accent">Fixture Design for Vibration Testing</h3>
+            <img src="assets/Fixture PIC 2.png" alt="Fixture Design" class="project-img">
+            <div class="achievement accent">Key Takeaway: Exposure to mechanical design DFAM techniques.</div>
+          </div>
+        </div>
+      </div>
+
       <div id="modal-bg" class="modal-bg"></div>
     </section>
 
-    <!-- Experience -->
     <section id="experience" class="section">
       <h2 class="section-title accent">Experience</h2>
       <div class="projects-instructions accent">Click an experience to learn more</div>
@@ -184,7 +208,6 @@
       </div>
     </section>
 
-    <!-- Contact -->
     <section id="contact" class="section">
       <h2 class="section-title accent">Contact</h2>
       <div class="contact-wrap centered-contact">

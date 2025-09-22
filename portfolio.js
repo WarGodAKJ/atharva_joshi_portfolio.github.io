@@ -84,6 +84,7 @@ document.querySelectorAll('.mobile-link').forEach(link => {
 
 /* Project Modal Functionality */
 const projectsInfo = {
+  // Personal Projects
   proj1: {
     title: "Tone Control/Karaoke Mixer Circuit",
     desc: "A five-stage audio processing system, featuring mixer/karaoke switching, tone control, and LED display. Designed and simulated using Multisim and MATLAB.",
@@ -118,8 +119,40 @@ const projectsInfo = {
     achievement: "",
     img: "assets/project5-img.jpg",
     link: null
+  },
+  // Internship Projects
+  intern1: {
+    title: "Screw Torque Testing - Cisco micro-LinkOVER",
+    desc: "Tested screws under different torque levels and lengths for failure behavior. Analyzed results and presented findings in a clear PowerPoint summary.",
+    achievement: "Key Takeaway: Hands-on experience with failure testing and data interpretation.",
+    img: "assets/Screw PIC 1.png",
+    img2: "assets/Screw PIC 2.png",
+    link: null
+  },
+  intern2: {
+    title: "PowerApp Interface for Failure Submissions",
+    desc: "Built a user-friendly PowerApp linked to SharePoint for failure tracking. Enabled direct customer input for failed product details.",
+    achievement: "Key Takeaway: Improved understanding of customer-facing tools in engineering.",
+    img: "assets/Power PIC 1.png",
+    img2: "assets/Power PIC 2.png",
+    link: null
+  },
+  intern3: {
+    title: "Qualification Reports & LLCR Data Processing",
+    desc: "Transferred LLCR data from Excel to Minitab for statistical analysis (probability plots, descriptive stats). Edited and prepared Qualification Test Reports in Overleaf using LaTeX templates. Sourced technical info (test methods, QTR numbers, requirements) to ensure accuracy.",
+    achievement: "Key Takeaway: Proficiency in Minitab and Overleaf.",
+    img: "assets/Qualification PIC 1.png",
+    link: null
+  },
+  intern4: {
+    title: "Fixture Design for Vibration Testing",
+    desc: "Helped design fixtures for PCB vibration testing. Reviewed 2D PCB traces, and designed fixture to accommodate them.",
+    achievement: "Key Takeaway: Exposure to mechanical design DFAM techniques.",
+    img: "assets/Fixture PIC 2.png",
+    link: null
   }
 };
+
 
 const modalBg = document.getElementById('modal-bg');
 let modalEl = null;
@@ -134,13 +167,19 @@ function openModal(projectKey) {
   modalEl = document.createElement("div");
   modalEl.className = "project-modal";
 
+  // Build the image block. It can contain one or two images.
+  let imageBlock = `<img src="${project.img}" alt="${project.title}">`;
+  if (project.img2) {
+    imageBlock += `<img src="${project.img2}" alt="${project.title} additional view">`;
+  }
+
   // Special case for project 5 (title + image only)
   if (projectKey === "proj5") {
     modalEl.innerHTML = `
       <button class="modal-close" title="Close">&times;</button>
       <h3>${project.title}</h3>
       <div class="modal-right" style="grid-column: span 2; justify-content:center;">
-        <img src="${project.img}" alt="${project.title}">
+        ${imageBlock}
       </div>
     `;
   } else {
@@ -153,7 +192,7 @@ function openModal(projectKey) {
         ${project.link ? `<a href="${project.link.url}" target="_blank" class="modal-link">${project.link.label}</a>` : ""}
       </div>
       <div class="modal-right">
-        <img src="${project.img}" alt="${project.title}">
+        ${imageBlock}
       </div>
     `;
   }
