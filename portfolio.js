@@ -63,7 +63,10 @@ document.addEventListener('click', (e) => {
 
 // Close on Escape
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeMobileNav();
+  if (e.key === 'Escape') {
+    closeMobileNav();
+    closeModal();
+  }
 });
 
 // Smooth scrolling for nav links
@@ -156,14 +159,25 @@ const projectsInfo = {
 
 const modalBg = document.getElementById('modal-bg');
 let modalEl = null;
+let closeModalTimer = null; // To hold the timeout for closing the modal
 
 function openModal(projectKey) {
   const project = projectsInfo[projectKey];
   if (!project) return;
 
-  closeModal(); // Close any existing modal first
-  
+  // If a modal is already closing, cancel the cleanup timer to prevent it
+  // from removing the new modal we're about to open.
+  if (closeModalTimer) {
+    clearTimeout(closeModalTimer);
+  }
+
+  // If a modal is already open, remove its content immediately.
+  if (modalEl) {
+    modalEl.remove();
+  }
+
   modalBg.classList.add('open');
+  document.body.style.overflow = "hidden";
 
   modalEl = document.createElement("div");
   modalEl.className = "project-modal";
@@ -198,31 +212,35 @@ function openModal(projectKey) {
     `;
   }
 
-  modalBg.appendChild(modalEl); // Append modal to background for animation
-  document.body.style.overflow = "hidden";
+  modalBg.appendChild(modalEl);
 
+  // Add event listeners for closing the modal
   modalEl.querySelector('.modal-close').onclick = closeModal;
   modalBg.onclick = function(e) {
-      if (e.target === modalBg) {
-          closeModal();
-      }
+    // Only close if the background itself is clicked, not the modal content
+    if (e.target === modalBg) {
+      closeModal();
+    }
   };
 }
 
 function closeModal() {
   if (modalEl) {
     modalBg.classList.remove('open');
-    // Wait for the animation to finish before removing the element
-    setTimeout(() => {
-        if (modalEl) { // Check if it still exists
-            modalBg.innerHTML = ''; // Clear the modal content
-            modalEl = null;
-            document.body.style.overflow = "";
-        }
-    }, 400); // Match CSS transition time
+    document.body.style.overflow = "";
+
+    // Keep a reference to the current modal to remove it after the animation
+    const modalToRemove = modalEl;
+    
+    closeModalTimer = setTimeout(() => {
+      modalToRemove.remove();
+      // Ensure we only nullify the global variable if a new modal hasn't been opened
+      if (modalEl === modalToRemove) {
+        modalEl = null;
+      }
+    }, 400); // Must match your CSS transition duration
   }
 }
-
 
 document.querySelectorAll('.project-card').forEach(card =>
   card.onclick = function() {
