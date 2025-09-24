@@ -254,7 +254,7 @@ a:hover { text-decoration: underline; }
   color: var(--accent);
   padding: 0.41rem 1.32rem;
   border-radius: 6px;
-  margin-bottom: 0.23rem;
+  margin-bottom: 0.8rem; /* Increased spacing */
   font-size: 1rem;
   border: 1px solid var(--outline-light);
   backdrop-filter: blur(10px);
@@ -263,6 +263,7 @@ a:hover { text-decoration: underline; }
 
 .skills-centered {
   display: flex;
+  flex-direction: column; /* Changed to column for spacing */
   justify-content: center;
   align-items: center;
 }
@@ -371,15 +372,22 @@ a:hover { text-decoration: underline; }
   background: rgba(30, 34, 54, 0.82);
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
-  display: none;
   z-index: 900;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.modal-bg.open {
+    opacity: 1;
+    visibility: visible;
 }
 
 .project-modal {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0.95);
   width: 80%;
   max-width: 950px;
   background: rgba(33, 34, 37, 0.85);
@@ -396,6 +404,15 @@ a:hover { text-decoration: underline; }
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
   border: 1px solid rgba(255,255,255,0.05);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.modal-bg.open .project-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .project-modal .modal-close {

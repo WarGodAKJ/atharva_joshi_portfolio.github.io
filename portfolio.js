@@ -161,8 +161,9 @@ function openModal(projectKey) {
   const project = projectsInfo[projectKey];
   if (!project) return;
 
-  closeModal();
-  modalBg.style.display = "block";
+  closeModal(); // Close any existing modal first
+  
+  modalBg.classList.add('open');
 
   modalEl = document.createElement("div");
   modalEl.className = "project-modal";
@@ -197,21 +198,31 @@ function openModal(projectKey) {
     `;
   }
 
-  document.body.appendChild(modalEl);
+  modalBg.appendChild(modalEl); // Append modal to background for animation
   document.body.style.overflow = "hidden";
 
   modalEl.querySelector('.modal-close').onclick = closeModal;
-  modalBg.onclick = closeModal;
+  modalBg.onclick = function(e) {
+      if (e.target === modalBg) {
+          closeModal();
+      }
+  };
 }
 
 function closeModal() {
   if (modalEl) {
-    modalEl.remove();
-    modalEl = null;
-    document.body.style.overflow = "";
+    modalBg.classList.remove('open');
+    // Wait for the animation to finish before removing the element
+    setTimeout(() => {
+        if (modalEl) { // Check if it still exists
+            modalBg.innerHTML = ''; // Clear the modal content
+            modalEl = null;
+            document.body.style.overflow = "";
+        }
+    }, 400); // Match CSS transition time
   }
-  modalBg.style.display = "none";
 }
+
 
 document.querySelectorAll('.project-card').forEach(card =>
   card.onclick = function() {
