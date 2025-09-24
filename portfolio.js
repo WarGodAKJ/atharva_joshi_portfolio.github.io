@@ -165,13 +165,10 @@ function openModal(projectKey) {
   const project = projectsInfo[projectKey];
   if (!project) return;
 
-  // If a modal is already closing, cancel the cleanup timer to prevent it
-  // from removing the new modal we're about to open.
   if (closeModalTimer) {
     clearTimeout(closeModalTimer);
   }
 
-  // If a modal is already open, remove its content immediately.
   if (modalEl) {
     modalEl.remove();
   }
@@ -182,13 +179,11 @@ function openModal(projectKey) {
   modalEl = document.createElement("div");
   modalEl.className = "project-modal";
 
-  // Build the image block. It can contain one or two images.
   let imageBlock = `<img src="${project.img}" alt="${project.title}">`;
   if (project.img2) {
     imageBlock += `<img src="${project.img2}" alt="${project.title} additional view">`;
   }
 
-  // Special case for project 5 (title + image only)
   if (projectKey === "proj5") {
     modalEl.innerHTML = `
       <button class="modal-close" title="Close">&times;</button>
@@ -214,10 +209,8 @@ function openModal(projectKey) {
 
   modalBg.appendChild(modalEl);
 
-  // Add event listeners for closing the modal
   modalEl.querySelector('.modal-close').onclick = closeModal;
   modalBg.onclick = function(e) {
-    // Only close if the background itself is clicked, not the modal content
     if (e.target === modalBg) {
       closeModal();
     }
@@ -229,16 +222,14 @@ function closeModal() {
     modalBg.classList.remove('open');
     document.body.style.overflow = "";
 
-    // Keep a reference to the current modal to remove it after the animation
     const modalToRemove = modalEl;
     
     closeModalTimer = setTimeout(() => {
       modalToRemove.remove();
-      // Ensure we only nullify the global variable if a new modal hasn't been opened
       if (modalEl === modalToRemove) {
         modalEl = null;
       }
-    }, 400); // Must match your CSS transition duration
+    }, 400); 
   }
 }
 
@@ -254,4 +245,163 @@ document.querySelectorAll('.exp-header').forEach(header => {
     const parent = header.parentElement;
     parent.classList.toggle('open');
   }
+});
+
+/* --- LAVA LAMP BACKGROUND ANIMATION --- */
+window.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('lava-lamp-bg');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    const isTouchDevice = 'ontouchstart' in window;
+
+    const mouse = {
+        x: null,
+        y: null,
+        vx: 0,
+        vy: 0,
+        lastX: null,
+        lastY: null,
+        timer: null
+    };
+
+    const config = {
+        colors: ['#4338CA', '#6D28D9', '#4338CA'],
+        ballCount: 15,
+        mouseForce: isTouchDevice ? 0 : 400,
+        speed: 0.1, 
+        blur: 40,
+        contrast: 30,
+    };
+
+    class Ball {
+        constructor(layer) {
+            this.layer = layer;
+            this.respawn();
+            this.vy = (Math.random() - 0.5) * config.speed * this.scale;
+            this.vx = (Math.random() - 0.5) * config.speed * this.scale;
+        }
+
+        respawn() {
+            this.scale = 0.2 + (this.layer / 3) * 0.8;
+            this.r = (100 + Math.random() * 100) * this.scale;
+            this.x = Math.random() * (width - 2 * this.r) + this.r;
+            this.y = Math.random() * (height - 2 * this.r) + this.r;
+            this.color = config.colors[Math.floor(Math.random() * config.colors.length)];
+        }
+
+        update() {
+            // Add inherent slow motion (buoyancy and drift)
+            this.vy -= 0.005 * this.scale * config.speed;
+            this.vx += (Math.random() - 0.5) * 0.01 * config.speed;
+
+            // Mouse interaction
+            if (config.mouseForce > 0 && mouse.x !== null) {
+                const dx = this.x - mouse.x;
+                const dy = this.y - mouse.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                const interactionRadius = 150 * this.scale;
+                
+                if (dist < interactionRadius) {
+                    const angle = Math.atan2(dy, dx);
+                    const force = (interactionRadius - dist) / interactionRadius;
+                    
+                    this.vx += (Math.cos(angle) * force + mouse.vx) * 0.1 * this.scale;
+                    this.vy += (Math.sin(angle) * force + mouse.vy) * 0.1 * this.scale;
+                }
+            }
+            
+            this.x += this.vx;
+            this.y += this.vy;
+
+            // Boundary checks
+            if (this.x < this.r) { this.x = this.r; this.vx *= -0.9; }
+            if (this.x > width - this.r) { this.x = width - this.r; this.vx *= -0.9; }
+            if (this.y < this.r) { this.y = this.r; this.vy *= -0.9; }
+            if (this.y > height - this.r) { this.y = height - this.r; this.vy *= -0.9; }
+
+            this.vx *= 0.995;
+            this.vy *= 0.995;
+        }
+
+        draw() {
+            ctx.beginPath();
+            const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r);
+            gradient.addColorStop(0, this.color + 'ff');
+            gradient.addColorStop(0.8, this.color + 'b0');
+            gradient.addColorStop(1, this.color + '00');
+
+            ctx.fillStyle = gradient;
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    const layers = [
+        { count: Math.floor(config.ballCount * 0.25), balls: [] },
+        { count: Math.floor(config.ballCount * 0.35), balls: [] },
+        { count: Math.floor(config.ballCount * 0.40), balls: [] },
+    ];
+
+    function setup() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        layers.forEach((layer, i) => {
+            layer.balls = [];
+            for (let j = 0; j < layer.count; j++) {
+                layer.balls.push(new Ball(i + 1));
+            }
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        ctx.filter = `blur(${config.blur}px) contrast(${config.contrast})`;
+        
+        layers.forEach(layer => {
+            layer.balls.forEach(ball => {
+                ball.update();
+                ball.draw();
+            });
+        });
+        
+        ctx.filter = 'none';
+
+        requestAnimationFrame(animate);
+    }
+    
+    window.addEventListener('resize', setup);
+
+    if (!isTouchDevice) {
+        window.addEventListener('mousemove', e => {
+            if (mouse.timer) {
+                clearTimeout(mouse.timer);
+            }
+
+            if (mouse.lastX !== null) {
+                mouse.vx = (e.clientX - mouse.lastX) * 0.5;
+                mouse.vy = (e.clientY - mouse.lastY) * 0.5;
+            }
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            mouse.lastX = e.clientX;
+            mouse.lastY = e.clientY;
+
+            mouse.timer = setTimeout(() => {
+                mouse.vx = 0;
+                mouse.vy = 0;
+            }, 100);
+        });
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+            mouse.vx = 0;
+            mouse.vy = 0;
+        });
+    }
+
+    setup();
+    animate();
 });
