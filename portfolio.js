@@ -292,7 +292,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
         respawn() {
             this.scale = 0.2 + (this.layer / 3) * 0.8;
-            this.r = (100 + Math.random() * 100) * this.scale;
+            if (window.innerWidth <= 750) { // Check for mobile screen width
+                this.r = (50 + Math.random() * 50) * this.scale; // Smaller bulbs for mobile
+            } else {
+                this.r = (100 + Math.random() * 100) * this.scale; // Original size for desktop
+            }
             this.x = Math.random() * (width - 2 * this.r) + this.r;
             this.y = Math.random() * (height - 2 * this.r) + this.r;
             this.color = config.colors[Math.floor(Math.random() * config.colors.length)];
