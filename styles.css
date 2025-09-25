@@ -581,8 +581,8 @@ a:hover { text-decoration: underline; }
 
 /* Gyroscope Button */
 .gyro-button {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--glass-bg-dark);
+  border: 1px solid var(--outline-light);
   color: var(--text-light);
   padding: 0.6rem 1.2rem;
   margin-top: 2rem;
