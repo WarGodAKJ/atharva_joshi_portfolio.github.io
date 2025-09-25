@@ -609,7 +609,21 @@ a:hover { text-decoration: underline; }
 @media (max-width: 750px) {
   .split-hero { flex-direction: column; min-height: 55vh; }
   .split-left, .split-right { padding: 2.2rem 8%; }
-  #typewriter { font-size: 2.25rem; }
+  #typewriter {
+    font-size: 3.5rem; /* Increased font size */
+    text-shadow: 0 0 25px rgba(191, 214, 253, 0.5); /* Pop-out highlight */
+  }
+  .about-header-lines {
+    font-size: 0.9rem; /* Set a base font size for both lines */
+  }
+  .about-header-main {
+    white-space: nowrap; /* Prevent this line from wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis if it still overflows */
+  }
+  .about-header-tagline {
+    white-space: normal; /* Allow this line to wrap */
+  }
   .section-title { font-size: 2.5rem; }
   .exp-card { margin-left: 0; margin-right: 0; max-width: 98vw; }
   .project-subheading {
