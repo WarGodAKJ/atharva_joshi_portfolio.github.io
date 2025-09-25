@@ -266,6 +266,12 @@ window.addEventListener('DOMContentLoaded', () => {
         timer: null
     };
 
+    // Gyroscope data
+    const gyro = {
+        x: 0,
+        y: 0
+    };
+
     const config = {
         colors: ['#4338CA', '#6D28D9', '#4338CA'],
         ballCount: 15,
@@ -273,6 +279,7 @@ window.addEventListener('DOMContentLoaded', () => {
         speed: 0.1, 
         blur: 40,
         contrast: 30,
+        gyroForce: 0.1 // Adjust this value to change gyroscope sensitivity
     };
 
     class Ball {
@@ -295,6 +302,12 @@ window.addEventListener('DOMContentLoaded', () => {
             // Add inherent slow motion (buoyancy and drift)
             this.vy -= 0.005 * this.scale * config.speed;
             this.vx += (Math.random() - 0.5) * 0.01 * config.speed;
+
+            // Gyroscope interaction
+            if (isTouchDevice) {
+                this.vx += gyro.x * config.gyroForce * this.scale;
+                this.vy += gyro.y * config.gyroForce * this.scale;
+            }
 
             // Mouse interaction
             if (config.mouseForce > 0 && mouse.x !== null) {
@@ -401,6 +414,38 @@ window.addEventListener('DOMContentLoaded', () => {
             mouse.vy = 0;
         });
     }
+
+    // --- NEW GYROSCOPE CODE ---
+    const gyroButton = document.getElementById('gyro-button');
+    if (gyroButton) {
+        gyroButton.addEventListener('click', () => {
+            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                // iOS 13+
+                DeviceOrientationEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === 'granted') {
+                            window.addEventListener('deviceorientation', handleOrientation);
+                            gyroButton.style.display = 'none'; // Hide button after permission is granted
+                        }
+                    })
+                    .catch(console.error);
+            } else {
+                // Non-iOS 13+ devices
+                window.addEventListener('deviceorientation', handleOrientation);
+                gyroButton.style.display = 'none';
+            }
+        });
+    }
+
+    function handleOrientation(event) {
+        // Gyroscope data:
+        // event.beta is the front-to-back tilt (x-axis)
+        // event.gamma is the side-to-side tilt (y-axis)
+        // We'll normalize the values a bit.
+        gyro.y = event.beta / 90; 
+        gyro.x = event.gamma / 90;
+    }
+    // --- END NEW GYROSCOPE CODE ---
 
     setup();
     animate();
