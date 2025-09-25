@@ -237,11 +237,12 @@ a:hover { text-decoration: underline; }
 
 .section-title {
   text-align: center;
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: 900;
   color: var(--accent);
   letter-spacing: 1.1px;
   margin-bottom: 1.7rem;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
 }
 
 /* About */
@@ -318,6 +319,7 @@ a:hover { text-decoration: underline; }
   font-weight: 800;
   text-align: left;
   margin-bottom: 0.5rem;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
 }
 
 .projects-instructions {
@@ -325,6 +327,7 @@ a:hover { text-decoration: underline; }
   font-size: 1.02rem;
   font-weight: 500;
   margin-bottom: 1.5rem;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
 }
 
 .projects-instructions.left-aligned {
@@ -586,7 +589,7 @@ a:hover { text-decoration: underline; }
   .split-hero { flex-direction: column; min-height: 55vh; }
   .split-left, .split-right { padding: 2.2rem 8%; }
   #typewriter { font-size: 2.25rem; }
-  .section-title { font-size: 2.2rem; }
+  .section-title { font-size: 2.5rem; }
   .exp-card { margin-left: 0; margin-right: 0; max-width: 98vw; }
   .project-subheading {
     font-size: 1.8rem;
