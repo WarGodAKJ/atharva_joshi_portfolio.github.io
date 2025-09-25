@@ -415,35 +415,37 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- GYROSCOPE CODE ---
-    function enableGyro() {
-        if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-            // iOS 13+
-            DeviceOrientationEvent.requestPermission()
-                .then(permissionState => {
-                    if (permissionState === 'granted') {
-                        window.addEventListener('deviceorientation', handleOrientation);
-                    }
-                })
-                .catch(console.error);
-        } else {
-            // Non-iOS 13+ devices
-            window.addEventListener('deviceorientation', handleOrientation);
-        }
+    // --- NEW GYROSCOPE CODE ---
+    const gyroButton = document.getElementById('gyro-button');
+    if (gyroButton) {
+        gyroButton.addEventListener('click', () => {
+            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                // iOS 13+
+                DeviceOrientationEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === 'granted') {
+                            window.addEventListener('deviceorientation', handleOrientation);
+                            gyroButton.style.display = 'none'; // Hide button after permission is granted
+                        }
+                    })
+                    .catch(console.error);
+            } else {
+                // Non-iOS 13+ devices
+                window.addEventListener('deviceorientation', handleOrientation);
+                gyroButton.style.display = 'none';
+            }
+        });
     }
 
     function handleOrientation(event) {
         // Gyroscope data:
-        // event.beta is the front-to-back tilt (y-axis)
-        // event.gamma is the side-to-side tilt (x-axis)
+        // event.beta is the front-to-back tilt (x-axis)
+        // event.gamma is the side-to-side tilt (y-axis)
         // We'll normalize the values a bit.
         gyro.y = event.beta / 90; 
         gyro.x = event.gamma / 90;
     }
-
-    // Attempt to enable gyroscope on page load
-    enableGyro();
-    // --- END GYROSCOPE CODE ---
+    // --- END NEW GYROSCOPE CODE ---
 
     setup();
     animate();
