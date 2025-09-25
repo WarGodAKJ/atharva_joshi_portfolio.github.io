@@ -415,7 +415,7 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- NEW GYROSCOPE CODE ---
+    // --- GYROSCOPE CODE ---
     const gyroButton = document.getElementById('gyro-button');
     if (gyroButton) {
         gyroButton.addEventListener('click', () => {
@@ -439,13 +439,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function handleOrientation(event) {
         // Gyroscope data:
-        // event.beta is the front-to-back tilt (x-axis)
-        // event.gamma is the side-to-side tilt (y-axis)
+        // event.beta is the front-to-back tilt (y-axis)
+        // event.gamma is the side-to-side tilt (x-axis)
         // We'll normalize the values a bit.
         gyro.y = event.beta / 90; 
         gyro.x = event.gamma / 90;
     }
-    // --- END NEW GYROSCOPE CODE ---
+    // --- END GYROSCOPE CODE ---
 
     setup();
     animate();
