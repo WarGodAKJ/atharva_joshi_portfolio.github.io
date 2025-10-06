@@ -254,7 +254,9 @@ window.addEventListener('DOMContentLoaded', () => {
     const ctx = canvas.getContext('2d');
 
     let width, height;
-    const isTouchDevice = 'ontouchstart' in window;
+    
+    // Use a function to check for mobile screen width
+    const isMobile = () => window.innerWidth <= 750;
 
     const mouse = {
         x: null,
@@ -275,7 +277,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const config = {
         colors: ['#4338CA', '#6D28D9', '#4338CA'],
         ballCount: 15,
-        mouseForce: isTouchDevice ? 0 : 400,
+        // Disable mouseForce if on a mobile screen width
+        mouseForce: isMobile() ? 0 : 400,
         speed: 0.1, 
         blur: 40,
         contrast: 30,
@@ -292,7 +295,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
         respawn() {
             this.scale = 0.2 + (this.layer / 3) * 0.8;
-            if (window.innerWidth <= 750) { // Check for mobile screen width
+            // Use screen width to determine ball size
+            if (isMobile()) { 
                 this.r = (50 + Math.random() * 50) * this.scale; // Smaller bulbs for mobile
             } else {
                 this.r = (100 + Math.random() * 100) * this.scale; // Original size for desktop
@@ -307,13 +311,13 @@ window.addEventListener('DOMContentLoaded', () => {
             this.vy -= 0.005 * this.scale * config.speed;
             this.vx += (Math.random() - 0.5) * 0.01 * config.speed;
 
-            // Gyroscope interaction
-            if (isTouchDevice) {
+            // Gyroscope interaction on mobile screen widths
+            if (isMobile()) {
                 this.vx += gyro.x * config.gyroForce * this.scale;
                 this.vy += gyro.y * config.gyroForce * this.scale;
             }
 
-            // Mouse interaction
+            // Mouse interaction (will be disabled on mobile due to mouseForce being 0)
             if (config.mouseForce > 0 && mouse.x !== null) {
                 const dx = this.x - mouse.x;
                 const dy = this.y - mouse.y;
@@ -364,6 +368,9 @@ window.addEventListener('DOMContentLoaded', () => {
     function setup() {
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
+        // Re-check mobile status on resize
+        config.mouseForce = isMobile() ? 0 : 400; 
+
         layers.forEach((layer, i) => {
             layer.balls = [];
             for (let j = 0; j < layer.count; j++) {
@@ -391,7 +398,8 @@ window.addEventListener('DOMContentLoaded', () => {
     
     window.addEventListener('resize', setup);
 
-    if (!isTouchDevice) {
+    // Only add mouse listeners if not on a mobile screen width
+    if (!isMobile()) {
         window.addEventListener('mousemove', e => {
             if (mouse.timer) {
                 clearTimeout(mouse.timer);
