@@ -607,8 +607,22 @@ a:hover { text-decoration: underline; }
 }
 
 @media (max-width: 750px) {
-  .split-hero { flex-direction: column; min-height: 55vh; }
-  .split-left, .split-right { padding: 2.2rem 8%; }
+  .split-hero {
+    flex-direction: column;
+    min-height: calc(100vh - 64px); /* Full height minus navbar */
+  }
+  .split-left {
+    padding: 1.5rem 8%; /* Reduced vertical padding */
+    flex: 0.8; /* Give less space to the image container */
+  }
+  .split-right {
+    padding: 1.5rem 8%; /* Reduced vertical padding */
+    flex: 1; /* Give more space to the text container */
+  }
+  .hero-img {
+    max-height: 280px; /* Constrain image height */
+    width: auto; /* Allow width to scale with height */
+  }
   #typewriter {
     font-size: 2.25rem;
     text-shadow: 0 0 25px rgba(191, 214, 253, 0.5); /* Pop-out highlight */
