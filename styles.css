@@ -610,14 +610,15 @@ a:hover { text-decoration: underline; }
   .split-hero {
     flex-direction: column;
     min-height: calc(100vh - 64px);
-    justify-content: center; /* Vertically center content */
-  }
-  .split-left, .split-right {
-    padding: 1rem 8%; /* Adjust padding */
-    flex: none; /* Allow natural sizing */
+    /* Let items align to top by default */
   }
   .split-left {
-    justify-content: center; /* Horizontally center the image */
+    padding: 2rem 8%; /* Added padding to give image breathing room */
+    flex: 0 0 auto; /* Let height be based on content, don't grow/shrink */
+  }
+  .split-right {
+    flex: 1 1 auto; /* Grow to fill remaining vertical space */
+    padding: 1rem 8%;
   }
   .hero-img {
     max-height: 280px;
