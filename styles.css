@@ -618,8 +618,8 @@ a:hover { text-decoration: underline; }
   }
   .split-right {
     flex: 1 1 auto;
-    padding: 0 8% 1rem 8%;
-    justify-content: center; /* This perfectly centers the content block */
+    padding: 1rem 8%;
+    justify-content: center; 
   }
   .hero-img {
     max-height: 280px;
