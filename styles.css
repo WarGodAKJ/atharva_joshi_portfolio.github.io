@@ -610,7 +610,7 @@ a:hover { text-decoration: underline; }
   .split-hero {
     flex-direction: column;
     min-height: calc(100vh - 64px);
-    justify-content: space-evenly; /* Distribute space to push top item up */
+    justify-content: center; /* Vertically center content */
   }
   .split-left, .split-right {
     padding: 1rem 8%; /* Adjust padding */
