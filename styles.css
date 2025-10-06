@@ -219,7 +219,7 @@ a:hover { text-decoration: underline; }
   text-shadow: 0 0 15px rgba(191, 214, 253, 0.3);
 }
 
-.about-header-lines { margin-top: 2em; }
+.about-header-lines { margin-top: 1em; }
 
 .about-header-main, .about-header-tagline {
   font-size: 1.08rem;
@@ -619,7 +619,7 @@ a:hover { text-decoration: underline; }
   .split-right {
     flex: 1 1 auto;
     padding: 0 8% 1rem 8%;
-    justify-content: space-around; /* This perfectly centers the content block */
+    justify-content: center; /* This perfectly centers the content block */
   }
   .hero-img {
     max-height: 280px;
