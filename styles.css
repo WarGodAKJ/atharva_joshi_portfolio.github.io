@@ -618,7 +618,7 @@ a:hover { text-decoration: underline; }
   }
   .split-right {
   flex: 1 1 auto;
-  padding: 0 8% 1rem 8%;
+  padding: 2rem 8% 1rem 8%;
   justify-content: flex-start; /* Aligns content to the top */
   }
   .hero-img {
