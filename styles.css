@@ -609,23 +609,31 @@ a:hover { text-decoration: underline; }
 @media (max-width: 750px) {
   .split-hero {
     flex-direction: column;
-    min-height: calc(100vh - 64px); /* Full height minus navbar */
+    min-height: calc(100vh - 64px);
+    justify-content: center; /* Vertically center content */
+  }
+  .split-left, .split-right {
+    padding: 1rem 8%; /* Adjust padding */
+    flex: none; /* Allow natural sizing */
   }
   .split-left {
-    padding: 1.5rem 8%; /* Reduced vertical padding */
-    flex: 0.8; /* Give less space to the image container */
-  }
-  .split-right {
-    padding: 1.5rem 8%; /* Reduced vertical padding */
-    flex: 1; /* Give more space to the text container */
+    justify-content: center; /* Horizontally center the image */
+    background: transparent; /* Match the right side background */
   }
   .hero-img {
-    max-height: 280px; /* Constrain image height */
-    width: auto; /* Allow width to scale with height */
+    max-height: 280px;
+    width: auto;
   }
   #typewriter {
     font-size: 2.25rem;
     text-shadow: 0 0 25px rgba(191, 214, 253, 0.5); /* Pop-out highlight */
+  }
+  .about-header-lines {
+    margin-top: 1.5em; /* Reduce space above text */
+  }
+  .gyro-button {
+    display: inline-block; /* Shown on mobile */
+    margin-top: 1.5rem; /* Reduce space above button */
   }
   .section-title { font-size: 2.5rem; }
   .exp-card { margin-left: 0; margin-right: 0; max-width: 98vw; }
@@ -641,9 +649,6 @@ a:hover { text-decoration: underline; }
   }
   .modal-right {
     margin-top: 1.5rem;
-  }
-  .gyro-button {
-    display: inline-block; /* Shown on mobile */
   }
 }
 
