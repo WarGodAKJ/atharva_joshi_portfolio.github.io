@@ -255,7 +255,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     let width, height;
     
-    // Use a function to check for mobile screen width
     const isMobile = () => window.innerWidth <= 750;
 
     const mouse = {
@@ -268,7 +267,6 @@ window.addEventListener('DOMContentLoaded', () => {
         timer: null
     };
 
-    // Gyroscope data
     const gyro = {
         x: 0,
         y: 0
@@ -277,12 +275,11 @@ window.addEventListener('DOMContentLoaded', () => {
     const config = {
         colors: ['#4338CA', '#6D28D9', '#4338CA'],
         ballCount: 15,
-        // Disable mouseForce if on a mobile screen width
         mouseForce: isMobile() ? 0 : 400,
         speed: 0.1, 
         blur: 40,
         contrast: 30,
-        gyroForce: 0.1 // Adjust this value to change gyroscope sensitivity
+        gyroForce: 0.1
     };
 
     class Ball {
@@ -295,11 +292,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
         respawn() {
             this.scale = 0.2 + (this.layer / 3) * 0.8;
-            // Use screen width to determine ball size
             if (isMobile()) { 
-                this.r = (50 + Math.random() * 50) * this.scale; // Smaller bulbs for mobile
+                this.r = (50 + Math.random() * 50) * this.scale;
             } else {
-                this.r = (100 + Math.random() * 100) * this.scale; // Original size for desktop
+                this.r = (100 + Math.random() * 100) * this.scale;
             }
             this.x = Math.random() * (width - 2 * this.r) + this.r;
             this.y = Math.random() * (height - 2 * this.r) + this.r;
@@ -307,17 +303,14 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         update() {
-            // Add inherent slow motion (buoyancy and drift)
             this.vy -= 0.005 * this.scale * config.speed;
             this.vx += (Math.random() - 0.5) * 0.01 * config.speed;
 
-            // Gyroscope interaction on mobile screen widths
             if (isMobile()) {
                 this.vx += gyro.x * config.gyroForce * this.scale;
                 this.vy += gyro.y * config.gyroForce * this.scale;
             }
 
-            // Mouse interaction (will be disabled on mobile due to mouseForce being 0)
             if (config.mouseForce > 0 && mouse.x !== null) {
                 const dx = this.x - mouse.x;
                 const dy = this.y - mouse.y;
@@ -336,7 +329,6 @@ window.addEventListener('DOMContentLoaded', () => {
             this.x += this.vx;
             this.y += this.vy;
 
-            // Boundary checks
             if (this.x < this.r) { this.x = this.r; this.vx *= -0.9; }
             if (this.x > width - this.r) { this.x = width - this.r; this.vx *= -0.9; }
             if (this.y < this.r) { this.y = this.r; this.vy *= -0.9; }
@@ -368,7 +360,6 @@ window.addEventListener('DOMContentLoaded', () => {
     function setup() {
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
-        // Re-check mobile status on resize
         config.mouseForce = isMobile() ? 0 : 400; 
 
         layers.forEach((layer, i) => {
@@ -381,7 +372,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function animate() {
         ctx.clearRect(0, 0, width, height);
-
         ctx.filter = `blur(${config.blur}px) contrast(${config.contrast})`;
         
         layers.forEach(layer => {
@@ -392,19 +382,23 @@ window.addEventListener('DOMContentLoaded', () => {
         });
         
         ctx.filter = 'none';
-
         requestAnimationFrame(animate);
     }
     
-    window.addEventListener('resize', setup);
+    // UPDATED RESIZE HANDLER
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.innerWidth !== width || window.innerHeight !== height) {
+                setup();
+            }
+        }, 250); // Debounce to avoid rapid firing
+    });
 
-    // Only add mouse listeners if not on a mobile screen width
     if (!isMobile()) {
         window.addEventListener('mousemove', e => {
-            if (mouse.timer) {
-                clearTimeout(mouse.timer);
-            }
-
+            if (mouse.timer) clearTimeout(mouse.timer);
             if (mouse.lastX !== null) {
                 mouse.vx = (e.clientX - mouse.lastX) * 0.5;
                 mouse.vy = (e.clientY - mouse.lastY) * 0.5;
@@ -458,7 +452,6 @@ window.addEventListener('DOMContentLoaded', () => {
             }
 
             if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-                // iOS 13+
                 DeviceOrientationEvent.requestPermission()
                     .then(permissionState => {
                         if (permissionState === 'granted') {
@@ -467,7 +460,6 @@ window.addEventListener('DOMContentLoaded', () => {
                     })
                     .catch(console.error);
             } else {
-                // Non-iOS 13+ devices
                 enableGyro();
             }
         });
