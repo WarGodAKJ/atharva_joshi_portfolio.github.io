@@ -618,8 +618,8 @@ a:hover { text-decoration: underline; }
   }
   .split-right {
     flex: 1 1 auto;
-    padding: 1rem 8%;
-    justify-content: center; /* Center the content block vertically */
+    padding: 0 8% 2rem 8%; /* Adjust padding for spacing */
+    justify-content: center;
   }
   .hero-img {
     max-height: 280px;
@@ -627,11 +627,11 @@ a:hover { text-decoration: underline; }
   }
   #typewriter {
     font-size: 2.25rem;
-    min-height: auto; /* Remove fixed min-height on mobile */
+    min-height: 2.5em; /* Pre-allocate space for two lines */
     text-shadow: 0 0 25px rgba(191, 214, 253, 0.5);
   }
   .about-header-lines {
-    margin-top: 1.5em;
+    margin-top: 1em;
   }
   .gyro-button {
     display: inline-block;
