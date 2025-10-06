@@ -610,15 +610,16 @@ a:hover { text-decoration: underline; }
   .split-hero {
     flex-direction: column;
     min-height: calc(100vh - 64px);
-    /* Let items align to top by default */
   }
   .split-left {
-    padding: 2rem 8%; /* Added padding to give image breathing room */
-    flex: 0 0 auto; /* Let height be based on content, don't grow/shrink */
+    padding: 2rem 8%;
+    flex: 0 0 auto;
+    justify-content: center; /* Horizontally center the image */
   }
   .split-right {
-    flex: 1 1 auto; /* Grow to fill remaining vertical space */
+    flex: 1 1 auto;
     padding: 1rem 8%;
+    justify-content: space-evenly; /* Creates the balanced spacing */
   }
   .hero-img {
     max-height: 280px;
@@ -629,11 +630,11 @@ a:hover { text-decoration: underline; }
     text-shadow: 0 0 25px rgba(191, 214, 253, 0.5); /* Pop-out highlight */
   }
   .about-header-lines {
-    margin-top: 1.5em; /* Reduce space above text */
+    margin-top: 0; /* Let flexbox handle spacing */
   }
   .gyro-button {
-    display: inline-block; /* Shown on mobile */
-    margin-top: 1.5rem; /* Reduce space above button */
+    display: inline-block;
+    margin-top: 0; /* Let flexbox handle spacing */
   }
   .section-title { font-size: 2.5rem; }
   .exp-card { margin-left: 0; margin-right: 0; max-width: 98vw; }
