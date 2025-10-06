@@ -614,12 +614,12 @@ a:hover { text-decoration: underline; }
   .split-left {
     padding: 2rem 8%;
     flex: 0 0 auto;
-    justify-content: center; /* Horizontally center the image */
+    justify-content: center;
   }
   .split-right {
     flex: 1 1 auto;
     padding: 1rem 8%;
-    justify-content: space-evenly; /* Creates the balanced spacing */
+    justify-content: center; /* Center the content block vertically */
   }
   .hero-img {
     max-height: 280px;
@@ -627,14 +627,15 @@ a:hover { text-decoration: underline; }
   }
   #typewriter {
     font-size: 2.25rem;
-    text-shadow: 0 0 25px rgba(191, 214, 253, 0.5); /* Pop-out highlight */
+    min-height: auto; /* Remove fixed min-height on mobile */
+    text-shadow: 0 0 25px rgba(191, 214, 253, 0.5);
   }
   .about-header-lines {
-    margin-top: 0; /* Let flexbox handle spacing */
+    margin-top: 1.5em;
   }
   .gyro-button {
     display: inline-block;
-    margin-top: 0; /* Let flexbox handle spacing */
+    margin-top: 1.5rem;
   }
   .section-title { font-size: 2.5rem; }
   .exp-card { margin-left: 0; margin-right: 0; max-width: 98vw; }
