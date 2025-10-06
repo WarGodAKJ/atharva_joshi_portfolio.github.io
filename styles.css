@@ -618,7 +618,6 @@ a:hover { text-decoration: underline; }
   }
   .split-left {
     justify-content: center; /* Horizontally center the image */
-    background: transparent; /* Match the right side background */
   }
   .hero-img {
     max-height: 280px;
