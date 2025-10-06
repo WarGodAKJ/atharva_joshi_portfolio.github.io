@@ -162,7 +162,7 @@ a:hover { text-decoration: underline; }
 /* Hero */
 .split-hero {
   display: flex;
-  min-height: 80vh;
+  min-height: calc(100vh - 64px);
   width: 100%;
   background: transparent;
 }
