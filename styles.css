@@ -618,8 +618,8 @@ a:hover { text-decoration: underline; }
   }
   .split-right {
     flex: 1 1 auto;
-    padding: 0 8% 2rem 8%;
-    justify-content: center; /* This centers the block of text vertically */
+    padding: 0 8% 1rem 8%;
+    justify-content: space-around; /* This perfectly centers the content block */
   }
   .hero-img {
     max-height: 280px;
@@ -627,7 +627,7 @@ a:hover { text-decoration: underline; }
   }
   #typewriter {
     font-size: 2.25rem;
-    min-height: 2.8em; /* Adjusted to guarantee space for both lines */
+    min-height: 3em; /* Guarantees space for both lines, preventing shift */
     text-shadow: 0 0 25px rgba(191, 214, 253, 0.5);
   }
   .about-header-lines {
