@@ -685,3 +685,15 @@ a:hover { text-decoration: underline; }
 
 /* utility */
 .accent { color: var(--accent); }
+
+/* --- ADD THIS NEW RULE --- */
+@media (min-width: 751px) {
+  .exp-card {
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease-in-out;
+  }
+
+  .exp-card:hover {
+    border-bottom-color: var(--accent);
+  }
+}
