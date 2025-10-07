@@ -85,6 +85,34 @@ document.querySelectorAll('.mobile-link').forEach(link => {
   });
 });
 
+/* --- Fullscreen functionality --- */
+const fullscreenButton = document.getElementById('fullscreen-button');
+const fullscreenOpenIcon = fullscreenButton.querySelector('.fullscreen-open');
+const fullscreenCloseIcon = fullscreenButton.querySelector('.fullscreen-close');
+
+function toggleFullScreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+}
+
+fullscreenButton.addEventListener('click', toggleFullScreen);
+
+document.addEventListener('fullscreenchange', () => {
+  if (document.fullscreenElement) {
+    fullscreenOpenIcon.style.display = 'none';
+    fullscreenCloseIcon.style.display = 'inline';
+  } else {
+    fullscreenOpenIcon.style.display = 'inline';
+    fullscreenCloseIcon.style.display = 'none';
+  }
+});
+
+
 /* Project Modal Functionality */
 const projectsInfo = {
   // Personal Projects
