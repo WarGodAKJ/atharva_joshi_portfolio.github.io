@@ -497,3 +497,27 @@ window.addEventListener('DOMContentLoaded', () => {
     setup();
     animate();
 });
+
+/* --- Scroll Animation --- */
+document.addEventListener("DOMContentLoaded", function() {
+  const fadeElems = document.querySelectorAll('.fade-in-element');
+
+  const options = {
+    root: null, // relative to document viewport
+    rootMargin: '0px', // margin around root. Values are similar to css property.
+    threshold: 0.1 // 10% of the item has to be visible
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, options);
+
+  fadeElems.forEach(elem => {
+    observer.observe(elem);
+  });
+});
